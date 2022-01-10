@@ -19,7 +19,7 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.mini1.find_one({"id": payload["id"]})
-        return render_template('index.html', user_info=user_info)
+        return render_template('home.html', user_info=user_info)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -28,7 +28,7 @@ def home():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    return render_template('index.html', msg=msg)
 
 @app.route('/api/login', methods=['POST'])
 def sign_in():
@@ -41,7 +41,7 @@ def sign_in():
 
     if result is not None:
         payload = {
-         'id': ide_receive,
+         'id': id_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
