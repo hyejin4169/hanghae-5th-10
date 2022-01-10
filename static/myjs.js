@@ -139,8 +139,8 @@ function regist() {
         type: "POST",
         url: "/api/register",
         data: {
-            username_give: id,
-            password_give: pw
+            id_give: id,
+            pw_give: pw
         },
         success: function (response) {
             alert("가입 완료~ 도쿄 보러가요~ ")
