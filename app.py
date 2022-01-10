@@ -7,8 +7,6 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
 
@@ -60,11 +58,7 @@ def sign_up():
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
         "username": username_receive,
-        "password": password_hash,
-        "profile_name": username_receive,
-        "profile_pic": "",
-        "profile_pic_real": "profile_pics/profile_placeholder.png",
-        "profile_info": ""
+        "password": password_hash
     }
     db.mini1.insert_one(doc)
     return jsonify({'result': 'success'})
