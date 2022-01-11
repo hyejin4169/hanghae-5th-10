@@ -90,9 +90,9 @@ def check_dup():
 
 
 #index 접속 시 모든 여행지 리스트 보여주는 라우터
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/api/index', methods=['POST', 'GET'])
 def places():
-    travel_list = list(db.lists.find({}))
+    travel_list = list(db.posts.find({}))
     id_list = []
 
     # id값을 가져올 수 있도록 db의 ObjectId로 되어있는 _id를 str형식으로 변경한다.
@@ -108,7 +108,7 @@ def places():
 @ app.route('/api/list', methods=['POST'])
 def show_places():
     words_receive = request.form['words_give']
-    place_list = list(db.lists.find({'title': {'$regex': words_receive, '$options': 'i'}}, {'_id': False}))
+    place_list = list(db.posts.find({'title': {'$regex': words_receive, '$options': 'i'}}, {'_id': False}))
     id_list = []
 
     # id값을 가져올 수 있도록 ObjectId로 되어있는 _id를 str형식으로 변경한다.

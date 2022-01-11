@@ -3,7 +3,7 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | My Tokyo</title>
+    <title>Home | My List</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -92,6 +92,22 @@
         </div>
     </form>
 </div>
+
+<!-- 좋아요 한 여행지 정렬 -->
+<div id="place_list" class="place_list">
+    {% if list|length %}
+        {% for item in list %}
+
+            <div class="cards-box w-100 mb-3 row"
+                 style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
+                <div class="card-body place_body" onclick="toRead('{{ item._id }}')">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text contents_ellipsis">{{ item.contents }}</p>
+                    <input type="hidden" id="review_id" value="{{ item._id }}">
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 
 </div>
 </body>
