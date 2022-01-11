@@ -1,9 +1,10 @@
+//로그아웃 함수
 function logout() {
     $.removeCookie('mytoken');
     alert('로그아웃!')
     window.location.href = '/login'
 }
-
+//로그인 함수
 function login() {
     let id = $("#input-id").val()
     let pw = $("#input-pw").val()
@@ -43,7 +44,7 @@ function login() {
     });
 }
 
-
+// 로그인 박스를 가려주고 회원가입 박스를 나타내주는 함수
 function toggle_regist() {
     $("#regist-box").toggleClass("is-hidden")
     $("#div-sign-in-or-up").toggleClass("is-hidden")
@@ -52,17 +53,17 @@ function toggle_regist() {
     $("#help-pw").toggleClass("is-hidden")
     $("#help-pw2").toggleClass("is-hidden")
 }
-
+//아이디 생성이 가능한 범위를 정해주는 함수
 function is_id(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
-
+//비밀번호 생성이 가능한 범위를 정해주는 함수
 function is_pw(asValue) {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
     return regExp.test(asValue);
 }
-
+//아이디 체크해주는 함수
 function check_dup() {
     let id = $("#input-id").val()
     console.log(id)
@@ -97,7 +98,7 @@ function check_dup() {
         }
     });
 }
-
+//회원가입와 비밀번호 2차 입력을 도와주는 함수
 function regist() {
     let id = $("#input-id").val()
     let pw = $("#input-pw").val()
