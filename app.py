@@ -23,7 +23,7 @@ def home():
         #db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부
         user_info = db.mini1.find_one({"id": payload["id"]})
         #유저 정보를 부여후 메인 페이지로 가기
-        return render_template('home.html', user_info=user_info)
+        return render_template('index.html', user_info=user_info)
     except jwt.ExpiredSignatureError: # 토큰이 만료 되었을 때
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError: #토큰을 부여 받지 못 했을때
@@ -32,7 +32,7 @@ def home():
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('index.html', msg=msg)
+    return render_template('login.html', msg=msg)
 # 실질적으로 로그인 역할을 하는 라우터
 @app.route('/api/login', methods=['POST'])
 def sign_in():
