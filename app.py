@@ -12,6 +12,8 @@ SECRET_KEY = 'SPARTA'
 
 client = MongoClient('3.36.96.88', 27017, username="test", password="test")
 db = client.Mini1
+
+
 #토큰이 있을 때 메인로 넘어가게 해주는 라우터
 @app.route('/')
 def home():
@@ -28,11 +30,15 @@ def home():
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError: #토큰을 부여 받지 못 했을때
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
+
 #로그인 페이지로 이동하는 라우터
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
+
+
 # 실질적으로 로그인 역할을 하는 라우터
 @app.route('/api/login', methods=['POST'])
 def sign_in():
@@ -49,12 +55,14 @@ def sign_in():
          'id': id_receive,
          'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
         return jsonify({'result': 'success', 'token': token, 'msg':'도쿄 구경가자~!'})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+
 #실질적으로 회원가입 하는 라우터
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -68,6 +76,8 @@ def register():
     }
     db.mini1.insert_one(doc)
     return jsonify({'result': 'success'})
+
+
 #아이디 중복을 확인해주는 라우터
 @app.route('/register/check_dup', methods=['POST'])
 def check_dup():
@@ -77,6 +87,40 @@ def check_dup():
     exists = bool(db.mini1.find_one({"id": id_receive}))
     # print(value_receive, type_receive, exists)
     return jsonify({'result': 'success', 'exists': exists})
+
+
+#index 접속 시 모든 여행지 리스트 보여주는 라우터
+@app.route('/', methods=['POST', 'GET'])
+def places():
+    travel_list = list(db.lists.find({}))
+    id_list = []
+
+    # id값을 가져올 수 있도록 db의 ObjectId로 되어있는 _id를 str형식으로 변경한다.
+    for item in travel_list:
+        id_list.append(str(item['_id']))
+
+    for i in range(len(travel_list)):
+        del travel_list[i]['_id']
+        travel_list[i]['_id'] = id_list[i]
+
+
+# 마이플레이스에 내가 추가한 여행지 디스플레이하는 라우터
+@ app.route('/api/list', methods=['POST'])
+def show_places():
+    words_receive = request.form['words_give']
+    place_list = list(db.lists.find({'title': {'$regex': words_receive, '$options': 'i'}}, {'_id': False}))
+    id_list = []
+
+    # id값을 가져올 수 있도록 ObjectId로 되어있는 _id를 str형식으로 변경한다.
+    for place in place_list:
+        id_list.append(str(place['_id']))
+
+    for i in range(len(place_list)):
+        del place_list[i]['_id']
+        place_list[i]['_id'] = id_list[i]
+
+    return jsonify({'all_places': place_list})
+
 
 #포스팅 저장해주는 라우터
 @app.route('/posting', methods=['POST'])
@@ -98,6 +142,8 @@ def posting():
         return jsonify({"result": "success", 'msg': '포스팅 성공'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
 #포스팅 올려주는 라우터
 @app.route("/get_posts", methods=['GET'])
 def get_posts():
@@ -116,6 +162,7 @@ def get_posts():
         return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", "posts": posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
 
 @app.route('/update_like', methods=['POST'])
 def update_like():
@@ -142,6 +189,7 @@ def update_like():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+
 @app.route('/user/<id>')
 def user(id):
     # 각 사용자의 프로필과 글을 모아볼 수 있는 공간
@@ -154,6 +202,8 @@ def user(id):
         return render_template('user.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

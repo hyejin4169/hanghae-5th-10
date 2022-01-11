@@ -4,6 +4,7 @@ function logout() {
     alert('로그아웃!')
     window.location.href = '/login'
 }
+
 //로그인 함수
 function login() {
     let id = $("#input-id").val()
@@ -53,16 +54,19 @@ function toggle_regist() {
     $("#help-pw").toggleClass("is-hidden")
     $("#help-pw2").toggleClass("is-hidden")
 }
+
 //아이디 생성이 가능한 범위를 정해주는 함수
 function is_id(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
+
 //비밀번호 생성이 가능한 범위를 정해주는 함수
 function is_pw(asValue) {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
     return regExp.test(asValue);
 }
+
 //아이디 체크해주는 함수
 function check_dup() {
     let id = $("#input-id").val()
@@ -97,6 +101,7 @@ function check_dup() {
         }
     });
 }
+
 //회원가입와 비밀번호 2차 입력을 도와주는 함수
 function regist() {
     let id = $("#input-id").val()
@@ -142,12 +147,56 @@ function regist() {
             pw_give: pw
         },
         success: function (response) {
-            alert("가입 완료~ 도쿄 보러가요~ ")
+            alert("가입 완료! 도쿄로 떠나볼까요? ")
             window.location.replace("/login")
         }
     });
 
 }
+
+function toRead(review_id) {
+
+    window.location.href = "/api/myList?review_id=" + review_id;
+
+}
+
+
+//인덱스에 추가한 여행지 보여주는 함수
+
+function showPlaces() {
+    var value = $('#searchWords').val();
+    console.log('value : ' + value)
+
+    $.ajax({
+        type: "POST",
+        url: "/api/list",
+        data: {words_give: value},
+        success: function (response) {
+            console.log('success')
+            let place_list = response['all_places']
+            console.log('search response : ' + place_list)
+            $('#place_list').empty()
+            for (let i = 0; i < place_list.length; i++) {
+                let title = place_list[i]['title']
+                let contents = place_list[i]['contents']
+                let id = place_list[i]['_id']
+                console.log("in for[" + i + "] : " + title + " , " + contents + " , " + id)
+
+                let temp_html = `<div class="cards-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
+                                            <div class="card-body place_body" onclick="toRead()">
+                                                <h5 class="card-title title">${title}</h5>
+                                                <p class="card-text contents_ellipsis">${contents}</p>
+                                                <input type="hidden" id="place_id" value="${id}">
+                                            </div>
+                                         </div>`
+
+                $('#place_list').append(temp_html)
+            }
+        }
+    })
+
+}
+
 function post() {
     let comment = $("#textarea-post").val()
     let today = new Date().toISOString()
@@ -179,7 +228,7 @@ function get_posts() {
                     let time_post = new Date(post["date"])
                     let time_before = time2str(time_post)
 
-                    let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
+                    let class_heart = post['heart_by_me'] ? "fa-heart" : "fa-heart-o"
 
                     let html_temp = `<div class="box" id="${post["_id"]}">
                                         <article class="media">
@@ -246,6 +295,7 @@ function num2str(count) {
     }
     return count
 }
+
 
 function toggle_like(post_id, type) {
     console.log(post_id, type)
