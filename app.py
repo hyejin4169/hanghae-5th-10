@@ -89,6 +89,27 @@ def check_dup():
 def detail():
 
     return render_template("detail.html")
+@app.route('/detail2')
+def detail2():
+
+    return render_template("detail2.html")
+
+@app.route('/detail/<keyword>', methods=["GET"])
+def detail_k(keyword):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        doc = db.posts.find_one({'title': keyword})
+        # db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부
+        print(doc)
+        # image = doc.request.form['image']
+        title = doc['title']
+        desc = doc['desc']
+        print(title, desc)
+        # name과 desc값 까지 넘겨주는건 성공, 아래 jsonify로 ajax에서 response[]로 값을 받음
+        return render_template("detail2.html", title=title, desc=desc)
+    except jwt.ExpiredSignatureError:  # 토큰이 만료 되었을 때
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
 
 
 # 메인페이지에서 리스트 눌렀을때 값을 받아서 이동하는 디테일 페이지
@@ -111,7 +132,9 @@ def detail_in():
     return jsonify({"result": "success", 'msg': 'detail/<keyword> 완료 하였습니다',
                     "title": title, "desc": desc})
 
-
+@app.route('/detail/<keyword>')
+def detailing(keyword):
+    return render_template("detail2.html", post=keyword)
 
 @app.route("/upload/api/add_List", methods=["POST"])
 def upload():

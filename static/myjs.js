@@ -208,7 +208,8 @@ function get_posts() {
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i]
                     let time_post = new Date(post["date"])
-                    console.log(time_post)
+                    console.log(post)
+
                     let time_before = time2str(time_post)
                     let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
                     let count_heart = post['count_heart']
@@ -217,7 +218,7 @@ function get_posts() {
                                                     <p>
                                                        <small>@${post['id']}</small> <small>${time_before}</small>                                                     
                                                     </p>
-                                        <div class="card-body place_body"  onclick="window.location.replace('/detail')">
+                                        <div class="card-body place_body"  onclick="detail2('${post['title']}')">
                                             <h5 class="card-title">${post['title']}</h5>
                                             <p class="card-text contents_ellipsis">${post['desc']}</p>
                                         </div>
@@ -235,7 +236,9 @@ function get_posts() {
         }
     })
 }
-
+function detail2(title) {
+    window.location.href = `/detail/${title}?`
+}
 function time2str(date) {
     let today = new Date()
     let time = (today - date) / 1000 / 60  // 분
@@ -317,3 +320,4 @@ function deleteDesc(title) {
                     }
                 });
             }
+
