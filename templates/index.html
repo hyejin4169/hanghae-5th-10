@@ -3,7 +3,7 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | My Tokyo</title>
+    <title>Home | MY TOKYO</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -68,9 +68,9 @@
                     My Page
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#" style="color: floralwhite; background-color: transparent;">My
+                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')" style="color: floralwhite; background-color: transparent;">My
                         Places</a>
-                    <a class="dropdown-item" href="#" style="color: floralwhite; background-color: transparent;">My
+                    <a class="dropdown-item" onclick="window.location.replace('/go_review')" style="color: floralwhite; background-color: transparent;">My
                         Reviews</a>
                 </div>
             </div>
