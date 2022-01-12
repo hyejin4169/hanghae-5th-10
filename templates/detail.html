@@ -26,35 +26,30 @@
 
     <style>
         *{
-            /*background-color: white;*/
+            {#background-color: #8a0309#}
             font-family: 'Jua', sans-serif;
         }
 
         .wrap{
-            background-color: #815151;
-            background-color: RGBA(129, 81, 81, 0.2);
+            background-color: #fff8dc;
             min-height: 100vh;
             padding-bottom: 50px;
         }
         .banner{
             width: 100%;
-            height: 200px;
-
-            background-color: white;
-            background-image: url("/static/Tokyo-Tower.jpg");
+            height: 100px;
+            background-color: #8a0309;
+            {#background-image: url("/static/imageloading.png");#}
             {#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#}
             background-size: cover;
             background-position: center;
 
         }
-        .banner h1{
-            font-size: 100px;
-            margin: auto;
-            padding: 50px;
+        h1{
+            font-size: 30px;
             color: white;
-            text-align: center;
-            {#background-color: beige;#}
-            {#opacity: 0;#}
+            padding: 30px 0px 0px 20px;
+
         }
 
         .topbar{
@@ -109,73 +104,87 @@
         .location-comment textarea{
             width: 100%;
         }
-
+        .middle{
+            border: 3px solid;
+            border-color: #651e1e;
+            border-radius: 5px;
+            background-color: white;
+            margin: 50px auto auto 50px;
+        }
+        button{
+            margin: auto;
+            text-align: center;
+            position: center;
+        }
     </style>
 
 
     <script>
+        $(document).ready(function () {
+            showupload()
+        })
 
-
-        function comt(){
-
-            alert('코멘트 작성 완료');
-        }
-
-        {#main페이지에서 항목 선택시 이동하는 ajax#}
-        function getinf(){
-            $('#detailbox').empty();
+       function showupload(){
             $.ajax({
                 type: "GET",
-                url: "/api/List{{ name }}",
+                url: '/detail/two',
                 data: {},
+                error: function (){
+                  alert(this.url)
+                },
                 success: function (response) {
-                    let info = response[0][0];
-                    for(let i=0; i<info.length; i++){
-                        let image = info['image'];
-                        let name = info['name'];
-                        let desc = info['desc'];
-                        {#let review = info['review'];#}
+                    alert(response['msg'])
+                    $('#detailbox').empty()
+                    let image = null
+                    let title = response['title']
+                    let desc = response['desc']
+                    let temp_html = `<div class="wrap" id="detailbox">
+                                        <div class="banner" onclick="window.location.href='/'">
+                                            <h1>도쿄 가봤니?</h1>
+                                        </div>
 
-                        let temp_html = `<div class="wrap" id="detailbox">
-                                            <div class="banner" onclick="window.location.href='/'">
-                                                <h1>도쿄 가봤니?</h1>
-                                            </div>
-
+                                        <!--추가 배너 제외 내용 감싸주기 -->
+                                        <div class="middle">
                                             <!--이미지 div -->
                                             <div class="image-box" id="imagebox">
-                                                <image class="imgclass" src="${image}"></image>
+                                                <image class="imgclass" src="/static/imageloading.png"></image>
                                             </div>
                                             <!--여행지 이름 div -->
                                             <div class="location-name" id="namebox">
-                                                ${name}
+                                                이곳은 여행지 이름이 들어가는 곳입니다
                                             </div>
                                             <!--내용 desc div-->
                                             <div class="location-desc" id="descbox">
-                                                <p>${desc}</p>
+                                                desc
+                                                <p>이곳은 여행지 desc가 들어가는 곳 입니다. 여행지 정보 가볼 곳 등등 정보를 받아오는곳...</p>
                                             </div>
+
                                             <!--댓글, 후기 쓰기 -->
                                             <div class="location-comment">
                                                 <textarea></textarea>
                                                 <button onclick="comt()">작성</button>
                                             </div>
-                                        </div>`
-                        $('#detailbox').append(temp_html);
-                    }
+                                        </div>
+                                        <input type="button" onclick="window.location.href='/'" value="홈으로">
+                                        <input type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
+                                    </div>`
+
+                    $('#detailbox').append(temp_html)
                 }
             })
         }
         {#게시글 업로드#}
         function create_new(){
             let image = $('#imagebox').url
-            let name = $('#namebox').val()
+            let title = $('#namebox').val()
             let desc = $('#descbox').val()
 
             $.ajax({
                 type: "POST",
-                url: "/api/edit_List{{ name }}",
+                url: "/api/edit_List{{ title }}",
                 data: {
                     image_give: image,
-                    name_give: name,
+                    title_give: title,
                     desc_give: desc
                 },
                 success: function (response) {
@@ -199,28 +208,31 @@
             <h1>도쿄 가봤니?</h1>
         </div>
 
-        <!--이미지 div -->
-        <div class="image-box" id="imagebox">
-            image
-            <image class="imgclass" src="/static/Tokyo-Tower.jpg"></image>
-        </div>
-        <!--여행지 이름 div -->
-        <div class="location-name" id="namebox">
-            이곳은 여행지 이름이 들어가는 곳입니다
-        </div>
-        <!--내용 desc div-->
-        <div class="location-desc" id="descbox">
-            desc
-            <p>이곳은 여행지 desc가 들어가는 곳 입니다. 여행지 정보 가볼 곳 등등 정보를 받아오는곳...</p>
-        </div>
+        <!--추가 배너 제외 내용 감싸주기 -->
+        <div class="middle">
+            <!--이미지 div -->
+            <div class="image-box" id="imagebox">
+                <image class="imgclass" src="/static/imageloading.png"></image>
+            </div>
+            <!--여행지 이름 div -->
+            <div class="location-name" id="namebox">
+                이곳은 여행지 이름이 들어가는 곳입니다
+            </div>
+            <!--내용 desc div-->
+            <div class="location-desc" id="descbox">
+                desc
+                <p>이곳은 여행지 desc가 들어가는 곳 입니다. 여행지 정보 가볼 곳 등등 정보를 받아오는곳...</p>
+            </div>
 
-        <!--댓글, 후기 쓰기 -->
-        <div class="location-comment">
-            <textarea></textarea>
-            <button onclick="comt()">작성</button>
+            <!--댓글, 후기 쓰기 -->
+            <div class="location-comment">
+                <textarea></textarea>
+                <button onclick="comt()">작성</button>
+            </div>
         </div>
+        <input type="button" onclick="window.location.href='/'" value="홈으로">
+        <input type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
 
-        <button onclick="window.location.href='/upload'">새글 쓰기</button>
     </div>
 
 </body>

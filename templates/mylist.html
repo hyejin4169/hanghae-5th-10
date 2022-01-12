@@ -3,7 +3,7 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | My Tokyo</title>
+    <title>Home | MY PLACES</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -34,12 +34,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    <script defer src="../static/mylistjs.js"></script>
+
 
     <script>
         $(document).ready(function () {
-            get_posts()
-            show_lists()
+            show_places()
         })
 
     </script>
@@ -66,7 +66,7 @@
                     My Page
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')" style="color: floralwhite; background-color: transparent;">My
+                    <a class="dropdown-item" href="/go_mylist" style="color: floralwhite; background-color: transparent;" >My
                         Places</a>
                     <a class="dropdown-item" onclick="window.location.replace('/go_review')" style="color: floralwhite; background-color: transparent;">My
                         Reviews</a>
@@ -81,13 +81,12 @@
 
 <!-- 중간 배너, 검색창-->
 <div class="mid_banner">
-    <h1>Have you ever been to Tokyo?</h1>
+    <h1>테스트 테스트 테스트</h1>
 
 </div>
 
 <!-- 좋아요 한 여행지 정렬 -->
-<div id="place_list" class="place_list">
+<div id="show_place" class="places_list">
 </div>
-<button onclick="window.location.replace('/upload')">글 작성하기(write)</button>
 </body>
 </html>

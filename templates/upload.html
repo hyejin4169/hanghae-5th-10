@@ -26,35 +26,30 @@
     <title>Title</title>
     <style>
         *{
-            /*background-color: white;*/
+            {#background-color: #8a0309#}
             font-family: 'Jua', sans-serif;
         }
 
         .wrap{
-            background-color: #815151;
-            background-color: RGBA(129, 81, 81, 0.2);
+            background-color: #fff8dc;
             min-height: 100vh;
             padding-bottom: 50px;
         }
         .banner{
             width: 100%;
-            height: 200px;
-
-            background-color: white;
-            background-image: url("/static/Tokyo-Tower.jpg");
+            height: 100px;
+            background-color: #8a0309;
+            {#background-image: url("/static/imageloading.png");#}
             {#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#}
             background-size: cover;
             background-position: center;
 
         }
-        .banner h1{
-            font-size: 100px;
-            margin: auto;
-            padding: 50px;
+        h1{
+            font-size: 30px;
             color: white;
-            text-align: center;
-            {#background-color: beige;#}
-            {#opacity: 0;#}
+            padding: 30px 0px 0px 20px;
+
         }
 
         .topbar{
@@ -76,6 +71,7 @@
 
         .image-box{
             background-color: green;
+
             width: 500px;
             height: 300px;
             overflow: hidden;
@@ -90,14 +86,18 @@
         }
 
         .location-name{
-            background-color: #7171d9;
+            background-color: beige;
+            border: none;
             width: 500px;
+            padding: 1px;
             margin: auto;
-            font-weight: bold;
+            {#font-weight: bold;#}
         }
         .location-desc{
             background-color: beige;
             width: 500px;
+            min-height: 150px;
+            padding: 1px;
             margin: auto;
         }
         .location-comment{
@@ -109,87 +109,57 @@
             width: 100%;
         }
         .input_box{
-            width: 100%;
-            padding: 0;
-            border-width: 0;
+            border-radius: 5px;
+            width: 99%;
+            padding: 0px;
+            margin: 2px;
+            border: none;
+        }
+        .location-desc > .input_box{
+            color: #9a9a9a;
+            min-height: 150px;
         }
         .uploadbtn{
+
             margin: auto;
         }
+        .uploadbox{
+            margin: auto;
+            width: 500px;
+        }
+
 
     </style>
 
     <script>
-        let name
         {#게시글 업로드#}
         function create_new(){
             {#let image = null#}
-            let name = $('#nameinput').val()
+            let title = $('#nameinput').val()
             let desc = $('#descinput').val()
-            console.log(name,desc)
+            let today = new Date().toISOString()
+            console.log(title,desc,today)
             $.ajax({
                 type: "POST",
                 url: '/upload/api/add_List',
                 data: {
                     {#image_give: image,#}
-                    name_give: name,
-                    desc_give: desc
+                    title_give: title,
+                    desc_give: desc,
+                    date_give:today
                 },
                 error: function (){
                   alert(this.url)
                 },
                 success: function (response) {
-                    alert(response['name'])
+                    alert(response['title'])
                     {#app.py에서 정상 작동후 아래 주소로 이동#}
-                    showupload(response['name'])
-                    {#window.location.href="/detail/"+name+""#}
+                    window.location.href="/detail"
+
                 }
             })
         }
 
-        function showupload(name){
-            let test = name
-            $.ajax({
-                type: "GET",
-                url: '/detail/'+test,
-                data: {},
-                error: function (){
-                  alert(this.url)
-                },
-                success: function (response) {
-                    alert(response['msg'])
-                    $('#detailbox').empty()
-                    let image = null
-                    let name = response['name']
-                    let desc = response['desc']
-                    let temp_html = `<div class="wrap" id="detailbox">
-                                            <div class="banner" onclick="window.location.href='/'">
-                                                <h1>도쿄 가봤니?</h1>
-                                            </div>
-
-                                            <!--이미지 div -->
-                                            <div class="image-box" id="imagebox">
-                                                <image class="imgclass" src="${image}"></image>
-                                            </div>
-                                            <!--여행지 이름 div -->
-                                            <div class="location-name" id="namebox">
-                                                ${name}
-                                            </div>
-                                            <!--내용 desc div-->
-                                            <div class="location-desc" id="descbox">
-                                                <p>${desc}</p>
-                                            </div>
-                                            <!--댓글, 후기 쓰기 -->
-                                            <div class="location-comment">
-                                                <textarea></textarea>
-                                                <button onclick="comt()">작성</button>
-                                            </div>
-                                        </div>`
-
-                    $('#detailbox').append(temp_html)
-                }
-            })
-        }
 
 
 
@@ -197,28 +167,30 @@
 </head>
 
 <body>
-test
+
     <div class="wrap" id="detailbox">
         <div class="banner" onclick="window.location.href='/'">
             <h1>도쿄 가봤니?</h1>
         </div>
 
-        <!--이미지 div -->
-        <div class="image-box" id="imagebox">
-            나중에 구현하기
-            <image class="imgclass" src="/static/Tokyo-Tower.jpg"></image>
-        </div>
-        <!--여행지 이름 div -->
-        <div class="location-name" id="namebox">
-            <input type="text" id="nameinput" class="input_box" placeholder="여행지 이름">
-        </div>
-        <!--내용 desc div-->
-        <div class="location-desc" id="descbox">
-            <textarea class="input_box" id="descinput" placeholder="소개 내용" ></textarea>
-        </div>
-        <!--댓글, 후기 쓰기 (나중에 추가하기) -->
+        <div class="uploadbox">
+            <!--이미지 div -->
+            <div class="image-box" id="imagebox">
+                <image class="imgclass" src="/static/imageloading.png"></image>
+            </div>
+            <!--여행지 이름 div -->
+            <div class="location-name" id="namebox">
+                <input type="text" id="nameinput" class="input_box" placeholder="여행지 이름">
+            </div>
+            <!--내용 desc div-->
+            <div class="location-desc" id="descbox">
+                <textarea class="input_box" id="descinput" placeholder="소개 내용"></textarea>
+            </div>
+            <!--댓글, 후기 쓰기 (나중에 추가하기) -->
 
-        <button type="button" class="uploadbtn" onclick="create_new()">업로드</button>
+            <button type="button" class="uploadbtn" onclick="create_new()">업로드</button>
+        </div>
+
     </div>
 
 </body>

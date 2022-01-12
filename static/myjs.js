@@ -148,25 +148,56 @@ function regist() {
     });
 
 }
+function show_lists() {
+    $("#place_list").empty()
+    $.ajax({
+        type: "GET",
+        url: "/get_lists",
+        data: {},
+        success: function (response) {
+            console.log('success')
+            let place_list = response['all_places']
+            for (let i = 0; i < place_list.length; i++) {
+                let title = place_list[i]['title']
+                let contents = place_list[i]['contents']
+                let id = place_list[i]['_id']
+                console.log('test : ' + title, contents, id)
+
+                let temp_html = `<div class="cards-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
+                                            <div class="card-body place_body">
+                                                <h5 class="card-title title">${title}</h5>
+                                                <p class="card-text contents_ellipsis">${contents}</p>
+                                                <input type="hidden" id="place_id" value="${id}">
+                                            </div>
+                                         </div>`
+
+                $('#place_list').append(temp_html)
+            }
+        }
+    })
+
+}
 function post() {
-    let comment = $("#textarea-post").val()
+    let title = $("#title-post").val()
+    let desc = $("#desc-post").val()
     let today = new Date().toISOString()
     $.ajax({
         type: "POST",
         url: "/posting",
         data: {
-            comment_give: comment,
+            title_give: title,
+            desc_give: desc,
             date_give: today
         },
         success: function (response) {
-            $("#modal-post").removeClass("is-active")
+            //$("#modal-post").removeClass("is-active")
             window.location.reload()
         }
     })
 }
 
 function get_posts() {
-    $("#post-box").empty()
+    $("#place_list").empty()
     $.ajax({
         type: "GET",
         url: `/get_posts`,
@@ -177,39 +208,28 @@ function get_posts() {
                 for (let i = 0; i < posts.length; i++) {
                     let post = posts[i]
                     let time_post = new Date(post["date"])
+                    console.log(time_post)
                     let time_before = time2str(time_post)
-
                     let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
-
-                    let html_temp = `<div class="box" id="${post["_id"]}">
-                                        <article class="media">
-                                            <div class="media-left">
-                                                <a class="image is-64x64" href="/user/${post['id']}">
-                                                    <img class="is-rounded" src="/static/${post['profile_pic_real']}"
-                                                         alt="Image">
-                                                </a>
-                                            </div>
-                                            <div class="media-content">
-                                                <div class="content">
+                    let count_heart = post['count_heart']
+                    let html_temp = `<div class="cards-box " id="cards-box">
+                                            <div class="content">
                                                     <p>
-                                                        <small>@${post['id']}</small> <small>${time_before}</small>
-                                                        <br>
-                                                        ${post['comment']}
+                                                       <small>@${post['id']}</small> <small>${time_before}</small>                                                     
                                                     </p>
-                                                </div>
-                                                <nav class="level is-mobile">
-                                                    <div class="level-left">
+                                        <div class="card-body place_body"  onclick="window.location.replace('/detail')">
+                                            <h5 class="card-title">${post['title']}</h5>
+                                            <p class="card-text contents_ellipsis">${post['desc']}</p>
+                                        </div>
+                                        <div class="level-left">
                                                         <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post['_id']}', 'heart')">
                                                             <span class="icon is-small"><i class="fa ${class_heart}"
-                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">${num2str(post["count_heart"])}</span>
+                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count_heart}</span>
                                                         </a>
                                                     </div>
-
-                                                </nav>
-                                            </div>
-                                        </article>
+                                        <button onclick="deleteDesc('${post['title']}')">삭제</button>
                                     </div>`
-                    $("#post-box").append(html_temp)
+                    $("#place_list").append(html_temp)
                 }
             }
         }
@@ -249,11 +269,11 @@ function num2str(count) {
 
 function toggle_like(post_id, type) {
     console.log(post_id, type)
-    let $a_like = $(`#${post_id} a[aria-label='${type}']`)
+    let $a_like = $(`#${post_id} a[aria-label='heart']`)
     let $i_like = $a_like.find("i")
-    let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
-    let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
-    if ($i_like.hasClass(class_s[type])) {
+    //let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
+    //let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
+    if ($i_like.hasClass("fa-heart")) {
         $.ajax({
             type: "POST",
             url: "/update_like",
@@ -264,7 +284,7 @@ function toggle_like(post_id, type) {
             },
             success: function (response) {
                 console.log("unlike")
-                $i_like.addClass(class_o[type]).removeClass(class_s[type])
+                $i_like.addClass("fa-heart-o").removeClass("fa-heart")
                 $a_like.find("span.like-num").text(num2str(response["count"]))
             }
         })
@@ -279,10 +299,21 @@ function toggle_like(post_id, type) {
             },
             success: function (response) {
                 console.log("like")
-                $i_like.addClass(class_s[type]).removeClass(class_o[type])
+                $i_like.addClass('fa-heart').removeClass('fa-heart-o')
                 $a_like.find("span.like-num").text(num2str(response["count"]))
             }
         })
 
     }
 }
+function deleteDesc(title) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/delete',
+                    data: {title_give:title},
+                    success: function (response) {
+                        alert(response['msg']);
+                        window.location.reload()
+                    }
+                });
+            }
