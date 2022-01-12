@@ -48,8 +48,12 @@
 <body>
 
 <!-- 상단 배너 -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light parent" style="background-color: darkred;">
-    <a class="navbar-brand" href="#" style="color: floralwhite;">도쿄 가봤니?</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
+     style="background-color: darkred; color: floralwhite;">
+    <img src="{{ url_for('static',filename='logo.png') }}" width="35">
+    <a class="navbar-brand" href="/" style="color: floralwhite;">
+        <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄로 가자!</marquee>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,9 +70,12 @@
                     My Page
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')" style="color: floralwhite; background-color: transparent;" >My
+                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                       style="color: floralwhite; background-color: transparent;">My
                         Places</a>
-                    <a class="dropdown-item" href="/go_review" style="color: floralwhite; background-color: transparent;">My Reviews</a>
+                    <a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                       style="color: floralwhite; background-color: transparent;">My
+                        Reviews</a>
                 </div>
             </div>
             <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
@@ -77,12 +84,6 @@
         </div>
     </div>
 </nav>
-
-<!-- 중간 배너, 검색창-->
-<div class="mid_banner">
-    <h1>테스트 테스트 테스트</h1>
-
-</div>
 
 <!-- 내가 남긴 리뷰 정렬 -->
 <div id="show_review" class="reviews_list">

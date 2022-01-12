@@ -22,7 +22,7 @@ def home():
     try:
         # 받아온 토큰을 디코드하여 payload를 설정
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        # db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부
+        # db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부여
         user_info = db.mini1.find_one({"id": payload["id"]})
         # 유저 정보를 부여후 메인 페이지로 가기
         return render_template('index.html', user_info=user_info)
@@ -57,7 +57,7 @@ def sign_in():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-        return jsonify({'result': 'success', 'token': token, 'msg': '도쿄 구경가자~!'})
+        return jsonify({'result': 'success', 'token': token, 'msg': '도쿄로 떠나자!'})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
