@@ -73,7 +73,7 @@ body {
 
 /*드롭다운 리스트 마우스 오버 시 펼쳐지게*/
 .nav-item:hover
-.dropdown-menu{
+.dropdown-menu {
     display: block;
     background-color: darkred;
 }
@@ -107,8 +107,14 @@ body {
     outline: none;
 }
 
+/*메인에 뜨는 리뷰 카드들*/
 .cards-box {
     border-radius: 25px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    float: none;
+    text-align: center;
+
 }
 
 .cards {
@@ -121,6 +127,28 @@ body {
     margin: 0 auto;
 }
 
-.place_list {
-    ;
+. card {
+    position: absolute;
+}
+
+/*글쓰기 버튼*/
+.btn {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
+}
+
+/*삭제 버튼*/
+.button_design {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
 }

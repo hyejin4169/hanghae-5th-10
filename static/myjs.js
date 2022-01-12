@@ -200,6 +200,7 @@ function post() {
     })
 }
 
+//데이터별로 단독의 카드가 디스플레이 되려면 어떻게?
 function get_posts() {
     $("#place_list").empty()
     $.ajax({
@@ -232,8 +233,10 @@ function get_posts() {
                                                                                            aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count_heart}</span>
                                                         </a>
                                                     </div>
-                                        <button onclick="deleteDesc('${post['title']}')">삭제</button>
+                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
+                                        
                                     </div>`
+
                     $("#place_list").append(html_temp)
                 }
             }

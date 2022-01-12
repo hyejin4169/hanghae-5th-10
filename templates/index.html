@@ -86,12 +86,13 @@
 <!-- 중간 배너, 검색창-->
 <div class="mid_banner">
     <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
-    <p>
+    <p><button type="button" class="btn" onclick="window.location.replace('/upload')">리뷰 작성하러 Go!</button>
 </div>
 
-<!-- 좋아요 한 여행지 정렬 -->
-<div id="place_list" class="place_list">
+<!-- 모든 리뷰 정렬 -->
+<div id="place_list" div class="card border-secondary" style="max-width: 20rem; background-color: #fff8dc;">
+  </div>
 </div>
-<button onclick="window.location.replace('/upload')">글 작성하기(write)</button>
+
 </body>
 </html>
