@@ -93,7 +93,7 @@ def check_dup():
 @app.route("/get_lists", methods=['GET'])
 def show_lists():
     place_list = list(db.reviews.find({}).sort("title", 1))
-    
+
     for place in place_list:
         place["_id"] = str(place["_id"])
     return jsonify({'all_places': place_list})
@@ -139,6 +139,40 @@ def get_posts():
         return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", "posts": posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
+# 마이리스트에 내가 저장한 여행지 보여주는 라우터
+@app.route("/get_places", methods=['GET'])
+def show_places():
+    places_list = list(db.myreviews.find({}).sort("title", 1))
+    print(places_list)
+    
+    for place in places_list:
+        place["_id"] = str(place["_id"])
+    return jsonify({'all_places': places_list})
+
+
+# 마이리스트 페이지로 이동하는 라우터
+@app.route('/go_mylist')
+def golist():
+    return render_template('mylist.html')
+
+
+# 마이리뷰에 내가 남긴 리뷰 보여주는 라우터
+@app.route("/get_reviews", methods=['GET'])
+def show_reviews():
+    reviews_list = list(db.realreviews.find({}).sort("title", 1))
+    print(reviews_list)
+
+    for review in reviews_list:
+        review["_id"] = str(review["_id"])
+    return jsonify({'all_reviews': reviews_list})
+
+
+# 마이리뷰 페이지로 이동하는 라우터
+@app.route('/go_review')
+def go_review():
+    return render_template('myreview.html')
 
 
 @app.route('/update_like', methods=['POST'])

@@ -3,7 +3,7 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | MY PLACES</title>
+    <title>Home | MY REVIEW</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -39,7 +39,7 @@
 
     <script>
         $(document).ready(function () {
-            show_places()
+            show_reviews()
         })
 
     </script>
@@ -66,10 +66,9 @@
                     My Page
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/go_mylist" style="color: floralwhite; background-color: transparent;" >My
+                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')" style="color: floralwhite; background-color: transparent;" >My
                         Places</a>
-                    <a class="dropdown-item" onclick="window.location.replace('/go_review')" style="color: floralwhite; background-color: transparent;">My
-                        Reviews</a>
+                    <a class="dropdown-item" href="/go_review" style="color: floralwhite; background-color: transparent;">My Reviews</a>
                 </div>
             </div>
             <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
@@ -85,8 +84,8 @@
 
 </div>
 
-<!-- 좋아요 한 여행지 정렬 -->
-<div id="show_place" class="places_list">
+<!-- 내가 남긴 리뷰 정렬 -->
+<div id="show_review" class="reviews_list">
 </div>
 </body>
 </html>

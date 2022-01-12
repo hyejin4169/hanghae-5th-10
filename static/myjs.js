@@ -327,7 +327,7 @@ function regist() {
 }
 
 
-//# 메인화면에 여행지 보여주는 함수
+// 메인화면에 여행지 보여주는 함수
 
 function show_lists() {
     $("#place_list").empty()
@@ -358,6 +358,7 @@ function show_lists() {
     })
 
 }
+
 
 function post() {
     let comment = $("#textarea-post").val()
@@ -426,6 +427,9 @@ function get_posts() {
         }
     })
 }
+
+
+
 
 function time2str(date) {
     let today = new Date()
