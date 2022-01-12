@@ -1,0 +1,132 @@
+
+    * {
+        font-family: 'Single Day', cursive;
+    }
+
+    .button.desc {
+        background-color: #8a0309;
+        border-color: transparent;
+        color: #fff !important;
+        font-family: 'Single Day', cursive;
+    }
+
+    .button.desc.is-outlined {
+        background-color: white;
+        border-color: #8a0309;
+        color: #8a0309 !important;
+        font-family: 'Single Day', cursive;
+    }
+
+    .help {
+        color: gray;
+        font-size: 15px;
+    }
+
+    body {
+        min-height: 100vh;
+        background-color: #fff8dc;
+    }
+
+    .section {
+        padding: 10rem 1.5rem;
+        max-width: 750px;
+        margin: auto;
+    }
+
+    .title {
+        font-weight: 800;
+        font-size: 5rem;
+    }
+
+    .desc {
+        margin: auto auto auto 10px;
+        color: white !important;
+    }
+
+    .is-hidden {
+        display: none !important;
+    }
+
+    .box {
+        padding: 100px 20px 100px 20px;
+        background-color: white;
+        border-radius: 20px;
+        border: solid 2px #8a0309;;
+    }
+
+    .input {
+        margin: auto;
+    }
+    .card{
+        margin: auto 200px auto 200px;
+    }
+    /*드롭다운 리스트 펼쳐지게*/
+    .nav-item:hover
+    .dropdown-menu {
+        display: block;
+        background-color: darkred;
+    }
+
+    /*상단 배너 고정*/
+
+    /*중간 배너*/
+    .mid_banner {
+        position: relative;
+        top: -23px;
+
+        width: 100%;
+        height: 300px;
+
+        color: floralwhite;
+        text-align: center;
+
+        background-image: url("https://stillmed.olympics.com/media/Images/OlympicOrg/News/2020/03/24/2020-03-24-tokyo-thumbnail-01.jpg");
+        background-size: cover;
+        background-position: center;
+
+        border-radius: 10px;
+
+        padding-top: 140px;
+
+    }
+
+    /*검색하기 버튼*/
+    .buttons {
+        margin: auto;
+        padding-top: 10px;
+        outline: none;
+    }
+
+    .cards-box {
+        border-radius: 25px;
+    }
+
+    .cards {
+        display: block;
+        justify-content: space-between;
+        padding-top: 30px;
+        padding-left: 80px;
+        flex-wrap: wrap;
+        float: none;
+        margin: 0 auto;
+        width:200px;
+        height:300px;
+        max-width: 350px;
+        max-height: 300px;
+        border: solid 2px black;
+    }
+    .cards-body{
+        width:30%;
+        height:300px;
+        max-width: 350px;
+        max-height: 300px;
+
+    }
+    .cards-box{
+        width:30%;
+        border: solid 2px black;
+        display: flex;
+    }
+    .place_list{
+        display: flex;
+    }
