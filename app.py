@@ -14,25 +14,25 @@ client = MongoClient('3.36.96.88', 27017, username="test", password="test")
 db = client.Mini1
 
 
-#토큰이 있을 때 메인로 넘어가게 해주는 라우터
+# 토큰이 있을 때 메인로 넘어가게 해주는 라우터
 @app.route('/')
 def home():
-    #로그인 후 받아온 토큰
+    # 로그인 후 받아온 토큰
     token_receive = request.cookies.get('mytoken')
     try:
-        #받아온 토큰을 디코드하여 payload를 설정
+        # 받아온 토큰을 디코드하여 payload를 설정
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        #db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부
+        # db에서 설정된 payload에 있는 id와 일치하는 정보를 찾아 유저정보에 부
         user_info = db.mini1.find_one({"id": payload["id"]})
-        #유저 정보를 부여후 메인 페이지로 가기
+        # 유저 정보를 부여후 메인 페이지로 가기
         return render_template('index.html', user_info=user_info)
-    except jwt.ExpiredSignatureError: # 토큰이 만료 되었을 때
+    except jwt.ExpiredSignatureError:  # 토큰이 만료 되었을 때
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
-    except jwt.exceptions.DecodeError: #토큰을 부여 받지 못 했을때
+    except jwt.exceptions.DecodeError:  # 토큰을 부여 받지 못 했을때
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-#로그인 페이지로 이동하는 라우터
+# 로그인 페이지로 이동하는 라우터
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
@@ -42,28 +42,28 @@ def login():
 # 실질적으로 로그인 역할을 하는 라우터
 @app.route('/api/login', methods=['POST'])
 def sign_in():
-    #로그인 input엣서 받은 정보를 가지고 옴
+    # 로그인 input엣서 받은 정보를 가지고 옴
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-    #가져온 비밀 번호를 hash처리
+    # 가져온 비밀 번호를 hash처리
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
-    #일치하는 정보 찾아 result 설정
+    # 일치하는 정보 찾아 result 설정
     result = db.mini1.find_one({'id': id_receive, 'pw': pw_hash})
-    #result가 존재 한다면 아이디와 시간을 가지고 토큰 설정 이때 str된 정보를 디코딩
+    # result가 존재 한다면 아이디와 시간을 가지고 토큰 설정 이때 str된 정보를 디코딩
     if result is not None:
         payload = {
-         'id': id_receive,
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+            'id': id_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-        return jsonify({'result': 'success', 'token': token, 'msg':'도쿄 구경가자~!'})
+        return jsonify({'result': 'success', 'token': token, 'msg': '도쿄 구경가자~!'})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-#실질적으로 회원가입 하는 라우터
+# 실질적으로 회원가입 하는 라우터
 @app.route('/api/register', methods=['POST'])
 def register():
     # 회원가입 input에서 가져온 정보를 설정 후 db에 저장
@@ -78,51 +78,28 @@ def register():
     return jsonify({'result': 'success'})
 
 
-#아이디 중복을 확인해주는 라우터
+# 아이디 중복을 확인해주는 라우터
 @app.route('/register/check_dup', methods=['POST'])
 def check_dup():
-    #중복 확인 대상이 되는 아이디 값을 가져옴
+    # 중복 확인 대상이 되는 아이디 값을 가져옴
     id_receive = request.form['id_give']
-    #가져온 값이 ture인지 false인지 판단
+    # 가져온 값이 ture인지 false인지 판단
     exists = bool(db.mini1.find_one({"id": id_receive}))
     # print(value_receive, type_receive, exists)
     return jsonify({'result': 'success', 'exists': exists})
 
 
-#index 접속 시 모든 여행지 리스트 보여주는 라우터
-@app.route('/api/index', methods=['POST', 'GET'])
-def places():
-    travel_list = list(db.posts.find({}))
-    id_list = []
-
-    # id값을 가져올 수 있도록 db의 ObjectId로 되어있는 _id를 str형식으로 변경한다.
-    for item in travel_list:
-        id_list.append(str(item['_id']))
-
-    for i in range(len(travel_list)):
-        del travel_list[i]['_id']
-        travel_list[i]['_id'] = id_list[i]
-
-
-# 마이플레이스에 내가 추가한 여행지 디스플레이하는 라우터
-@ app.route('/api/list', methods=['POST'])
-def show_places():
-    words_receive = request.form['words_give']
-    place_list = list(db.posts.find({'title': {'$regex': words_receive, '$options': 'i'}}, {'_id': False}))
-    id_list = []
-
-    # id값을 가져올 수 있도록 ObjectId로 되어있는 _id를 str형식으로 변경한다.
+# 메인화면에 여행지 디스플레이해주는 라우터
+@app.route("/get_lists", methods=['GET'])
+def show_lists():
+    place_list = list(db.reviews.find({}).sort("title", 1))
+    
     for place in place_list:
-        id_list.append(str(place['_id']))
-
-    for i in range(len(place_list)):
-        del place_list[i]['_id']
-        place_list[i]['_id'] = id_list[i]
-
+        place["_id"] = str(place["_id"])
     return jsonify({'all_places': place_list})
 
 
-#포스팅 저장해주는 라우터
+# 포스팅 저장해주는 라우터
 @app.route('/posting', methods=['POST'])
 def posting():
     token_receive = request.cookies.get('mytoken')
@@ -144,21 +121,21 @@ def posting():
         return redirect(url_for("home"))
 
 
-#포스팅 올려주는 라우터
+# 포스팅 올려주는 라우터
 @app.route("/get_posts", methods=['GET'])
 def get_posts():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        #id_receive = request.args.get("id_give")
-        #if id_receive=="":
+        # id_receive = request.args.get("id_give")
+        # if id_receive=="":
         posts = list(db.posts.find({}).sort("date", -1).limit(20))
-        #else:
-           # posts = list(db.posts.find({"id":id_receive}).sort("date", -1).limit(20))
+        # else:
+        # posts = list(db.posts.find({"id":id_receive}).sort("date", -1).limit(20))
         for post in posts:
             post["_id"] = str(post["_id"])
-           # post["count_heart"] = db.likes.count_documents({"post_id": post["_id"], "type": "heart"})
-           # post["heart_by_me"] = bool(db.likes.find_one({"post_id": post["_id"], "type": "heart", "id":payload["id"]}))
+        # post["count_heart"] = db.likes.count_documents({"post_id": post["_id"], "type": "heart"})
+        # post["heart_by_me"] = bool(db.likes.find_one({"post_id": post["_id"], "type": "heart", "id":payload["id"]}))
         return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", "posts": posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -202,7 +179,6 @@ def user(id):
         return render_template('user.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
-
 
 
 if __name__ == '__main__':

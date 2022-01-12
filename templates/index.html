@@ -34,11 +34,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    <script defer src="../static/myjs.js"></script>
+
 
     <script>
         $(document).ready(function () {
             get_posts()
+            show_lists()
+
         })
 
     </script>
@@ -81,18 +84,11 @@
 <!-- 중간 배너, 검색창-->
 <div class="mid_banner">
     <h1>Have you ever been to Tokyo?</h1>
-    <form method="GET" action="/api/myList">
-        <div class="buttons col-3">
-            <input type="search" name="search" class="form-control" id="inputKeyword" placeholder="검색어를 입력하세요."
-                   style="text-align: center;">
-            <button class="button is-danger" type="submit" class="btn" id="inputKeyword"
-                    style="background-color: darkred; color: floralwhite; position: absolute; top: 10px; right: -57px;">
-                검색하기
-            </button>
-        </div>
-    </form>
+
 </div>
 
+<!-- 좋아요 한 여행지 정렬 -->
+<div id="place_list" class="place_list">
 </div>
 </body>
 </html>
