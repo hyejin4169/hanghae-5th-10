@@ -1,132 +1,122 @@
 
-    * {
-        font-family: 'Single Day', cursive;
-    }
+* {
+    font-family: 'Yeon Sung', cursive;
+}
 
-    .button.desc {
-        background-color: #8a0309;
-        border-color: transparent;
-        color: #fff !important;
-        font-family: 'Single Day', cursive;
-    }
+.navbar {
+    height: 10px;
+    position: fixed;
+}
 
-    .button.desc.is-outlined {
-        background-color: white;
-        border-color: #8a0309;
-        color: #8a0309 !important;
-        font-family: 'Single Day', cursive;
-    }
+.button.desc {
+    background-color: #8a0309;
+    border-color: transparent;
+    color: #fff !important;
+    font-family: 'Single Day', cursive;
+}
 
-    .help {
-        color: gray;
-        font-size: 15px;
-    }
+.button.desc.is-outlined {
+    background-color: white;
+    border-color: #8a0309;
+    color: #8a0309 !important;
+    font-family: 'Single Day', cursive;
+}
 
-    body {
-        min-height: 100vh;
-        background-color: #fff8dc;
-    }
+.help {
+    color: gray;
+    font-size: 15px;
+}
 
-    .section {
-        padding: 10rem 1.5rem;
-        max-width: 750px;
-        margin: auto;
-    }
+body {
+    min-height: 100vh;
+    background-color: #fff8dc;
+}
 
-    .title {
-        font-weight: 800;
-        font-size: 5rem;
-    }
+.section {
+    padding: 10rem 1.5rem;
+    max-width: 750px;
+    margin: auto;
+}
 
-    .desc {
-        margin: auto auto auto 10px;
-        color: white !important;
-    }
+.title {
+    font-weight: 800;
+    font-size: 5rem;
+}
 
-    .is-hidden {
-        display: none !important;
-    }
+.desc {
+    margin: auto auto auto 10px;
+    color: white !important;
+}
 
-    .box {
-        padding: 100px 20px 100px 20px;
-        background-color: white;
-        border-radius: 20px;
-        border: solid 2px #8a0309;;
-    }
+.is-hidden {
+    display: none !important;
+}
 
-    .input {
-        margin: auto;
-    }
-    .card{
-        margin: auto 200px auto 200px;
-    }
-    /*드롭다운 리스트 펼쳐지게*/
-    .nav-item:hover
-    .dropdown-menu {
-        display: block;
-        background-color: darkred;
-    }
+.container {
+    padding-top: -80px;
+}
 
-    /*상단 배너 고정*/
+.box {
+    padding: 90px 20px 90px 20px;
+    background-color: white;
+    border-radius: 20px;
+    border: solid 2px #8a0309;;
+}
 
-    /*중간 배너*/
-    .mid_banner {
-        position: relative;
-        top: -23px;
+.input {
+    margin: auto;
+}
 
-        width: 100%;
-        height: 300px;
+.card {
+    margin: auto 200px auto 200px;
+}
 
-        color: floralwhite;
-        text-align: center;
+/*드롭다운 리스트 마우스 오버 시 펼쳐지게*/
+.nav-item:hover
+.dropdown-menu{
+    display: block;
+    background-color: darkred;
+}
 
-        background-image: url("https://stillmed.olympics.com/media/Images/OlympicOrg/News/2020/03/24/2020-03-24-tokyo-thumbnail-01.jpg");
-        background-size: cover;
-        background-position: center;
+/*중간 배너*/
+.mid_banner {
+    font-size: 50px;
 
-        border-radius: 10px;
+    position: relative;
 
-        padding-top: 140px;
+    width: 100%;
+    height: 300px;
 
-    }
+    color: floralwhite;
+    text-align: center;
 
-    /*검색하기 버튼*/
-    .buttons {
-        margin: auto;
-        padding-top: 10px;
-        outline: none;
-    }
+    background-image: url("https://stillmed.olympics.com/media/Images/OlympicOrg/News/2020/03/24/2020-03-24-tokyo-thumbnail-01.jpg");
+    background-size: cover;
+    background-position: center;
 
-    .cards-box {
-        border-radius: 25px;
-    }
+    border-radius: 10px;
 
-    .cards {
-        display: block;
-        justify-content: space-between;
-        padding-top: 30px;
-        padding-left: 80px;
-        flex-wrap: wrap;
-        float: none;
-        margin: 0 auto;
-        width:200px;
-        height:300px;
-        max-width: 350px;
-        max-height: 300px;
-        border: solid 2px black;
-    }
-    .cards-body{
-        width:30%;
-        height:300px;
-        max-width: 350px;
-        max-height: 300px;
+    padding-top: 130px;
 
-    }
-    .cards-box{
-        width:30%;
-        border: solid 2px black;
-        display: flex;
-    }
-    .place_list{
-        display: flex;
-    }
+}
+
+/*검색하기 버튼*/
+.buttons {
+    margin: auto;
+    padding-top: 10px;
+    outline: none;
+}
+
+.cards-box {
+    border-radius: 25px;
+}
+
+.cards {
+    display: block;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-left: 80px;
+    flex-wrap: wrap;
+    float: none;
+    margin: 0 auto;
+}

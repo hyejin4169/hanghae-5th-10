@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <meta property="og:title" content="스위터 - 세상을 달달하게"/>
+    <meta property="og:title" content="가보자"/>
     <meta property="og:description" content="mini project for Web Plus"/>
     <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
     <!-- Required meta tags -->
@@ -48,8 +48,12 @@
 <body>
 
 <!-- 상단 배너 -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light parent" style="background-color: darkred;">
-    <a class="navbar-brand" href="#" style="color: floralwhite;">도쿄 가봤니?</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
+     style="background-color: darkred; color: floralwhite;">
+    <img src="{{ url_for('static',filename='logo.png') }}" width="35">
+    <a class="navbar-brand" href="/" style="color: floralwhite;">
+        <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -81,8 +85,8 @@
 
 <!-- 중간 배너, 검색창-->
 <div class="mid_banner">
-    <h1>Have you ever been to Tokyo?</h1>
-
+    <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
+    <p>
 </div>
 
 <!-- 좋아요 한 여행지 정렬 -->

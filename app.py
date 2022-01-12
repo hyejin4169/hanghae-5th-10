@@ -205,12 +205,19 @@ def get_posts():
 # 마이리스트에 내가 저장한 여행지 보여주는 라우터
 @app.route("/get_places", methods=['GET'])
 def show_places():
-    places_list = list(db.myreviews.find({}).sort("title", 1))
-    print(places_list)
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.mini1.find_one({"id": payload["id"]})
+        places_list = list(db.posts.find({"id": user_info["id"]}).sort("date", -1).limit(20))
 
-    for place in places_list:
-        place["_id"] = str(place["_id"])
-    return jsonify({'all_places': places_list})
+        for place in places_list:
+            place["_id"] = str(place["_id"])
+        # post["count_heart"] = db.likes.count_documents({"post_id": post["_id"], "type": "heart"})
+        # post["heart_by_me"] = bool(db.likes.find_one({"post_id": post["_id"], "type": "heart", "id":payload["id"]}))
+        return jsonify({"result": "success", "msg": "포스팅을 가져왔습니다.", 'all_places': places_list})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 # 마이리스트 페이지로 이동하는 라우터
