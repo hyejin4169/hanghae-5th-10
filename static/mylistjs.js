@@ -17,18 +17,17 @@ function show_places() {
             let places_list = response['all_places']
             for (let i = 0; i < places_list.length; i++) {
                 let title = places_list[i]['title']
-                let contents = places_list[i]['contents']
+                let desc = places_list[i]['desc']
                 let id = places_list[i]['_id']
-                console.log('test : ' + title, contents, id)
+                console.log(places_list)
 
-                let temp_html = `<div class="cards-boxes w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
-                                            <div class="cards-body place_body">
-                                                <h5 class="cards-title title">${title}</h5>
-                                                <p class="cards-text contents_ellipsis">${contents}</p>
-                                                <input type="hidden" id="places_id" value="${id}">
+                let temp_html =`<div class="reviews-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
+                                            <div class="reviews-body place_body">
+                                                <h5 class="reviews-title title">'${title}'</h5>
+                                                <p class="reviews-text contents_ellipsis">'${desc}'</p>
+                                                <input type="hidden" id="reviews_id" value="${id}">
                                             </div>
                                          </div>`
-
                 $('#show_place').append(temp_html)
             }
         }
@@ -55,8 +54,8 @@ function show_reviews() {
 
                 let temp_html = `<div class="reviews-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
                                             <div class="reviews-body place_body">
-                                                <h5 class="reviews-title title">${title}</h5>
-                                                <p class="reviews-text contents_ellipsis">${contents}</p>
+                                                <h5 class="reviews-title title">'${title}'</h5>
+                                                <p class="reviews-text contents_ellipsis">'${contents}'</p>
                                                 <input type="hidden" id="reviews_id" value="${id}">
                                             </div>
                                          </div>`
