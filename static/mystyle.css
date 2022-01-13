@@ -67,15 +67,15 @@ body {
     margin: auto;
 }
 
-.card {
-    margin: auto 200px auto 200px;
-}
+/*.card {*/
+/*    margin: auto 200px auto 200px;*/
+/*}*/
 
 /*드롭다운 리스트 마우스 오버 시 펼쳐지게*/
 .nav-item:hover
-.dropdown-menu{
+.dropdown-menu {
     display: block;
-    background-color: darkred;
+    background-color: #8a0309;
 }
 
 /*중간 배너*/
@@ -107,8 +107,24 @@ body {
     outline: none;
 }
 
+/*메인에 뜨는 리뷰 카드들*/
 .cards-box {
+    /*float: left;*/
+    /*display: flex;*/
+    justify-content: space-between;
     border-radius: 25px;
+    border: solid 2px darkgrey;
+    width: 20%;
+    margin: 25px 50px 25px 50px;
+    background-color: white;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /*flex-wrap: wrap;*/
+    /*float: none;*/
+    /*text-align: center;*/
+    /*max-width: 20rem;*/
 }
 
 .cards {
@@ -119,4 +135,38 @@ body {
     flex-wrap: wrap;
     float: none;
     margin: 0 auto;
+}
+
+.place_list {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/*. card {*/
+/*    position: absolute;*/
+/*}*/
+
+/*글쓰기 버튼*/
+.btn {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
+}
+
+/*삭제 버튼*/
+.button_design {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
+    float: right;
 }

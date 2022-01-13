@@ -3,11 +3,11 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Home | MY TOKYO</title>
+    <title>Home | My Tokyo</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <meta property="og:title" content="스위터 - 세상을 달달하게"/>
+    <meta property="og:title" content="가보자"/>
     <meta property="og:description" content="mini project for Web Plus"/>
     <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
     <!-- Required meta tags -->
@@ -36,12 +36,10 @@
             crossorigin="anonymous"></script>
     <script defer src="../static/myjs.js"></script>
 
-
     <script>
         $(document).ready(function () {
             get_posts()
-            show_lists()
-
+            //show_lists()
         })
 
     </script>
@@ -51,7 +49,7 @@
 
 <!-- 상단 배너 -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
-     style="background-color: darkred; color: floralwhite;">
+     style="background-color: #8a0309; color: floralwhite;">
     <img src="{{ url_for('static',filename='logo.png') }}" width="35">
     <a class="navbar-brand" href="/" style="color: floralwhite;">
         <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
@@ -73,7 +71,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
-                       style="color: floralwhite; background-color: transparent;}">My
+                       style="color: floralwhite; background-color: transparent;">My
                         Places</a>
                     <a class="dropdown-item" onclick="window.location.replace('/go_review')"
                        style="color: floralwhite; background-color: transparent;">My
@@ -87,14 +85,17 @@
     </div>
 </nav>
 
-<!-- 중간 배너-->
+<!-- 중간 배너, 검색창-->
 <div class="mid_banner">
     <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
     <p>
+        <button type="button" class="btn" onclick="window.location.replace('/upload')">리뷰 작성하러 Go!</button>
 </div>
 
-<!-- 좋아요 한 여행지 정렬 -->
-<div id="place_list" class="place_list">
+<!-- 모든 리뷰 정렬 -->
+<div id="place_list">
+</div>
+
 </div>
 </body>
 </html>

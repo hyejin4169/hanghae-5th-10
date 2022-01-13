@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            /*background-color: white;*/
+            font-family: 'Jua', sans-serif;
+        }
+
+        .wrap{
+            background-color: #815151;
+            background-color: RGBA(129, 81, 81, 0.2);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+        .banner{
+            width: 100%;
+            height: 200px;
+
+            background-color: white;
+            background-image: url("/static/Tokyo-Tower.jpg");
+            /*{#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#}*/
+            background-size: cover;
+            background-position: center;
+
+        }
+        .banner h1{
+            font-size: 100px;
+            margin: auto;
+            padding: 50px;
+            color: white;
+            text-align: center;
+            /*{#background-color: beige;#}*/
+            /*{#opacity: 0;#}*/
+        }
+
+        .topbar{
+            background-color: #651e1e;
+
+
+            /*opacity: 0.5;*/
+
+            width: 100%;
+            height: 200px;
+
+            text-align: left;
+            font-weight: bold;
+            font-size: 50px;
+            padding: 50px 0px 0 50px;
+
+            color: white;
+        }
+
+        .image-box{
+            background-color: green;
+
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            margin: auto;
+        }
+        .imgclass{
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .location-name{
+            background-color: #7171d9;
+            width: 500px;
+            margin: auto;
+            font-weight: bold;
+        }
+        .location-desc{
+            background-color: beige;
+            width: 500px;
+            margin: auto;
+        }
+        .location-comment{
+            background-color: #dcdc77;
+            width: 500px;
+            margin: auto;
+        }
+        .location-comment textarea{
+            width: 100%;
+        }
+
+    </style>
+
+
+    <script>
+        let title ="{{title}}"
+        let desc = "{{desc}}"
+        /*
+        $(document).ready(function () {
+            showupload2(post)
+        })
+        function comt(){
+
+            alert('코멘트 작성 완료');
+        }
+
+       function showupload2(post){
+            let test =post
+            $.ajax({
+                type: "GET",
+                url: '/detail/'+test,
+                data: {},
+                success: function (response) {
+                    alert(response['msg'])
+                    $('#detailbox').empty()
+                    let title = response['title']
+                    let desc = response['desc']
+                    let temp_html = `<div class="wrap" id="detailbox">
+                                            <div class="banner" onclick="window.location.href='/'">
+                                                <h1>도쿄 가봤니?</h1>
+                                            </div>
+
+                                            <!--이미지 div -->
+                                            <div class="image-box" id="imagebox">
+                                                <image class="imgclass" src="${image}"></image>
+                                            </div>
+                                            <!--여행지 이름 div -->
+                                            <div class="location-name" id="namebox">
+                                                '${title}'
+                                            </div>
+                                            <!--내용 desc div-->
+                                            <div class="location-desc" id="descbox">
+                                                <p>${desc}</p>
+                                            </div>
+                                            <!--댓글, 후기 쓰기 -->
+                                            <div class="location-comment">
+                                                <textarea></textarea>
+                                                <button onclick="comt()">작성</button>
+                                            </div>
+                                        </div>`
+
+                    $('#detailbox').append(temp_html)
+                }
+            })
+        }*/
+
+        //게시글 업로드
+        function create_new(){
+            let image = $('#imagebox').url
+            let title = $('#namebox').val()
+            let desc = $('#descbox').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/api/edit_List{{ title }}",
+                data: {
+                    image_give: image,
+                    title_give: title,
+                    desc_give: desc
+                },
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<!--    디테일 페이지-->
+
+<!--    <div class="topbar">-->
+<!--            MY Tokyo-->
+<!--    </div>-->
+
+
+    <div class="wrap" id="detailbox">
+        <div class="banner" onclick="window.location.href='/'">
+            <h1>도쿄 가봤니?</h1>
+        </div>
+
+        <!--이미지 div -->
+        <div class="image-box" id="imagebox">
+            image
+            <image class="imgclass" src="/static/Tokyo-Tower.jpg"></image>
+        </div>
+        <!--여행지 이름 div -->
+        <div class="location-name" id="namebox">
+            {{title}}}
+        </div>
+        <!--내용 desc div-->
+        <div class="location-desc" id="descbox">
+            {{ desc }}
+        </div>
+
+        <!--댓글, 후기 쓰기 -->
+        <div class="location-comment">
+            <textarea></textarea>
+            <button onclick="comt()">작성</button>
+        </div>
+        <button onclick="window.location.replace('/')">홈으로</button>
+        <button onclick="window.location.href='/upload'">새글 쓰기</button>
+    </div>
+
+</body>
+</html>
