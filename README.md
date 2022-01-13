@@ -31,7 +31,7 @@
 ## 3. 실행화면🎬
 ![KakaoTalk_Photo_2022-01-13-17-14-14](https://user-images.githubusercontent.com/96376530/149291685-baf783e5-6e3a-414a-a61c-a1671b63ddf8.png)
 
-* 영상 링크: <https://youtu.be/ndfShYCjPiI/>
+* 영상 링크: https://youtu.be/Jccozcb2IfQ
 
 ## 4. 핵심기능✔
 ### * 로그인, 회원가입
