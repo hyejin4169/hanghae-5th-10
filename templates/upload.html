@@ -23,7 +23,7 @@
 
     <!-- 구글폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <title>Title</title>
+    <title>업로드</title>
     <style>
         *{
             /*background-color: white;*/
@@ -121,7 +121,33 @@
         .uploadbtn{
             margin: auto;
             width: 500px;
+            display: flex;
+            justify-content: center;
         }
+        .mid_banner {
+    font-size: 50px;
+
+    position: relative;
+
+    width: 100%;
+    height: 300px;
+
+    color: floralwhite;
+    text-align: center;
+
+    background-image: url("https://stillmed.olympics.com/media/Images/OlympicOrg/News/2020/03/24/2020-03-24-tokyo-thumbnail-01.jpg");
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 10px;
+
+    padding-top: 130px;
+
+}
+         body {
+    min-height: 100vh;
+    background-color: #fff8dc;
+}
 
     </style>
 
@@ -146,7 +172,7 @@
                   alert(this.url)
                 },
                 success: function (response) {
-                    alert(response['title'])
+                    {#alert(response['title'])#}
                     {#app.py에서 정상 작동후 아래 주소로 이동#}
                     window.location.href="/detail"
 
@@ -162,39 +188,47 @@
 
 <body>
 
-    <div class="wrap" id="detailbox">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light parent" style="background-color: darkred;">
-            <a class="navbar-brand" href="#" style="color: floralwhite;">도쿄 가봤니?</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <div class="navbar-nav">
-                    <div class="nav-item active">
-                        <a class="nav-link" href="/" style="color: floralwhite;">Home <span
-                                class="sr-only">(current)</span></a>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
-                            My Page
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/go_mylist"
-                               style="color: floralwhite; background-color: transparent;">My
-                                Places</a>
-                            <a class="dropdown-item" onclick="window.location.replace('/go_review')"
-                               style="color: floralwhite; background-color: transparent;">My
-                                Reviews</a>
-                        </div>
-                    </div>
-                    <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
-                        <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
-                    </div>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
+     style="background-color: darkred; color: floralwhite;">
+    <img src="{{ url_for('static',filename='logo.png') }}" width="35">
+    <a class="navbar-brand" href="/" style="color: floralwhite;">
+        <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="navbar-nav">
+            <div class="nav-item active">
+                <a class="nav-link" href="/" style="color: floralwhite;">Home <span
+                        class="sr-only">(current)</span></a>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
+                    My Page
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                       style="color: floralwhite; background-color: transparent;">My
+                        Places</a>
+                    <a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                       style="color: floralwhite; background-color: transparent;">My
+                        Reviews</a>
                 </div>
             </div>
-        </nav>
+            <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
+                <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+        <div class="mid_banner">
+    <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
+    <p>
+
+</div>
 
         <div class="uploadbox">
             <!--이미지 div -->

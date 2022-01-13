@@ -19,9 +19,9 @@ function show_places() {
                 let title = places_list[i]['title']
                 let desc = places_list[i]['desc']
                 let time_post = new Date(places_list["date"])
-                let id = places_list[i]['_id']
+                let id = places_list[i]['id']
                 let time_before = time2str(time_post)
-                console.log(places_list)
+                console.log(time_before,time_post,places_list)
 
 
                 let temp_html =`<div class="cards-box " id="cards-box">
