@@ -43,7 +43,7 @@
 
             background-color: white;
             background-image: url("/static/Tokyo-Tower.jpg");
-            /*{#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#} background-size: cover;*/
+        {#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#} background-size: cover;
             background-position: center;
 
         }
@@ -54,7 +54,7 @@
             padding: 50px;
             color: white;
             text-align: center;
-            /*{#background-color: beige;#}{#opacity: 0;#}*/
+        {#background-color: beige;#}{#opacity: 0;#}
         }
 
         .topbar {
@@ -97,25 +97,34 @@
         }
 
         .location-name {
-            background-color: #7171d9;
+            background-color: white;
             width: 500px;
             margin: auto;
             font-weight: bold;
+            
         }
 
         .location-desc {
-            background-color: beige;
+            background-color: white;
             width: 500px;
             margin: auto;
         }
 
         .location-comment {
-            /*{#background-color: #dcdc77;#} width: 500px;*/
+            {#background-color: #dcdc77;#}
+            width: 500px;
             margin: auto;
         }
 
         .location-comment textarea {
             width: 100%;
+        }
+        .middle {
+            width: 510px;
+            border: 3px #651e1e solid;
+            border-radius: 5px;
+            background-color: white;
+            margin: 90px auto auto;
         }
 
         .mid_banner {
@@ -191,7 +200,7 @@
                 }
             })
         }*/
-        //게시글 업로드
+        {#게시글 업로드#}
 
         function create_new() {
             let image = $('#imagebox').url
@@ -258,13 +267,12 @@
         </div>
     </div>
 </nav>
-
 <!-- 중간 배너, 검색창-->
 <div class="mid_banner">
     <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
     <p>
-</div>
 
+</div>
 <!--추가 배너 제외 내용 감싸주기 -->
 <div class="middle" style="margin-top: 20px">
     <!--이미지 div -->
@@ -273,11 +281,11 @@
     </div>
     <!--여행지 이름 div -->
     <div class="location-name" id="namebox">
-        {{ title }}
+        {{title}}
     </div>
     <!--내용 desc div-->
     <div class="location-desc" id="descbox">
-        <p>{{ desc }}</p>
+        <p>{{desc}}</p>
     </div>
 
     <!--댓글, 후기 쓰기 -->
