@@ -209,6 +209,7 @@ function get_posts() {
                     let post = posts[i]
                     let time_post = new Date(post["date"])
                     console.log(post)
+                    console.log(time_post)
 
                     let time_before = time2str(time_post)
                     // let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
