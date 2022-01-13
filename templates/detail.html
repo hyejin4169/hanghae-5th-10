@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -22,12 +30,12 @@
             crossorigin="anonymous"></script>
 
     <!-- 구글폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
 
     <style>
         * {
             /*background-color: white;*/
-            font-family: 'Jua', sans-serif;
+            font-family: 'Yeon Sung', cursive;
         }
 
         {#.wrap{#}
@@ -108,7 +116,7 @@
         .middle {
             width: 510px;
             border: 3px #651e1e solid;
-        {#border-color: #651e1e;#} border-radius: 5px;
+            border-radius: 5px;
             background-color: white;
             margin: 90px auto auto;
         }
@@ -124,10 +132,11 @@
             width: 500px;
             margin: auto;
         }
- body {
-    min-height: 100vh;
-    background-color: #fff8dc;
-}
+
+        body {
+            min-height: 100vh;
+            background-color: #fff8dc;
+        }
         .mid_banner {
             font-size: 50px;
 
@@ -146,7 +155,9 @@
             border-radius: 10px;
 
             padding-top: 130px;
-
+        }
+        .button_design{
+            margin: unset;
         }
     </style>
 
@@ -172,41 +183,41 @@
                     let title = response['title']
                     let desc = response['desc']
                     let temp_html = ` <nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
-                                           style="background-color: darkred; color: floralwhite;">
-                                            <img src="/static/logo.png width="35">
-                                             <a class="navbar-brand" href="/" style="color: floralwhite;">
-                                                <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
-                                            </a>
-                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                                                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                                                <span class="navbar-toggler-icon"></span>
-                                            </button>
-                                                                                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                                                <div class="navbar-nav">
-                                                    <div class="nav-item active">
-                                                        <a class="nav-link" href="/" style="color: floralwhite;">Home <span
-                                                                class="sr-only">(current)</span></a>
-                                                    </div>
-                                                                                           <div class="nav-item dropdown">
-                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                                           aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
-                                                            My Page
-                                                        </a>
-                                                                                               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                            <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
-                                                               style="color: floralwhite; background-color: transparent;">My
-                                                                Places</a>
-                                                            <a class="dropdown-item" onclick="window.location.replace('/go_review')"
-                                                               style="color: floralwhite; background-color: transparent;">My
-                                                                Reviews</a>
-                                                        </div>
-                                                    </div>
-                                                                                            <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
-                                                        <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+                                         style="background-color: #8a0309; color: floralwhite;">
+                                        <img src="{{ url_for('static',filename='logo.png') }}" width="35">
+                                        <a class="navbar-brand" href="/" style="color: floralwhite;">
+                                            <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
+                                        </a>
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                                                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
+                                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                            <div class="navbar-nav">
+                                                <div class="nav-item active">
+                                                    <a class="nav-link" href="/" style="color: floralwhite;">Home <span
+                                                            class="sr-only">(current)</span></a>
+                                                </div>
+                                                <div class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                                       aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
+                                                        My Page
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                        <div class="place_button"><a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                                                                                     style="color: floralwhite; background-color: transparent;">My
+                                                            Places</a></div>
+                                                        <div class="review_button"><a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                                                                                      style="color: floralwhite; background-color: transparent;">My
+                                                            Reviews</a></div>
                                                     </div>
                                                 </div>
+                                                <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
+                                                    <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+                                                </div>
                                             </div>
-                                        </nav>
+                                        </div>
+                                    </nav>
                                                                                 <!-- 중간 배너, 검색창-->
                                                                                 <div class="mid_banner">
                                             <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
@@ -235,8 +246,8 @@
                                             </div>
 
                                         <div class="inputbundle">
-                                        <input class="inputbtn" type="button" onclick="window.location.href='/'" value="홈으로">
-                                        <input class="inputbtn" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
+                                        <input class="inputbtn button_design" type="button" onclick="window.location.href='/'" value="홈으로">
+                                        <input class="inputbtn button_design" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
                                         </div>`
 
                     $('#detailbox').append(temp_html)
@@ -272,7 +283,7 @@
 
 <div class="wrap" id="detailbox">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
-         style="background-color: darkred; color: floralwhite;">
+         style="background-color: #8a0309; color: floralwhite;">
         <img src="{{ url_for('static',filename='logo.png') }}" width="35">
         <a class="navbar-brand" href="/" style="color: floralwhite;">
             <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
@@ -293,12 +304,14 @@
                         My Page
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
-                           style="color: floralwhite; background-color: transparent;">My
-                            Places</a>
-                        <a class="dropdown-item" onclick="window.location.replace('/go_review')"
-                           style="color: floralwhite; background-color: transparent;">My
-                            Reviews</a>
+                        <div class="place_button"><a class="dropdown-item"
+                                                     onclick="window.location.replace('/go_mylist')"
+                                                     style="color: floralwhite; background-color: transparent;">My
+                            Places</a></div>
+                        <div class="review_button"><a class="dropdown-item"
+                                                      onclick="window.location.replace('/go_review')"
+                                                      style="color: floralwhite; background-color: transparent;">My
+                            Reviews</a></div>
                     </div>
                 </div>
                 <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
@@ -335,8 +348,8 @@
         </div>
     </div>
     <div class="inputbundle" style="display: flex;justify-content: center;">
-        <input class="inputbtn" type="button" onclick="window.location.href='/'" value="홈으로">
-        <input class="inputbtn" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
+        <input class="inputbtn button_design" type="button" onclick="window.location.href='/'" value="홈으로">
+        <input class="inputbtn button_design" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
     </div>
 </div>
 </body>
