@@ -147,13 +147,12 @@ function regist() {
             pw_give: pw
         },
         success: function (response) {
-            alert("가입 완료~ 도쿄 보러가요~ ")
+            alert("가입 완료! 도쿄로 GO GO! ")
             window.location.replace("/login")
         }
     });
 
 }
-
 
 // function show_lists() {
 //     $("#place_list").empty()
@@ -184,8 +183,6 @@ function regist() {
 //     })
 //
 // }
-
-
 function post() {
     let title = $("#title-post").val()
     let desc = $("#desc-post").val()
@@ -205,7 +202,6 @@ function post() {
     })
 }
 
-//index에 모든 유저의 리뷰 디스플레이
 function get_posts() {
     $("#place_list").empty()
     $.ajax({
@@ -221,9 +217,9 @@ function get_posts() {
                     console.log(post)
 
                     let time_before = time2str(time_post)
-                    let class_heart = post['heart_by_me'] ? "fa-heart" : "fa-heart-o"
-                    let count_heart = post['count_heart']
-                    let temp_html = `<div class="cards-box " id="cards-box">
+                    // let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
+                    // let count_heart = post['count_heart']
+                    let html_temp = `<div class="cards-box " id="cards-box">
                                             <div class="content">
                                                     <p>
                                                        <small>@${post['id']}</small> <small>${time_before}</small>                                                     
@@ -232,17 +228,10 @@ function get_posts() {
                                             <h5 class="card-title">${post['title']}</h5>
                                             <p class="card-text contents_ellipsis">${post['desc']}</p>
                                         </div>
-                                        <div class="level-left">
-                                                        <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post['_id']}', 'heart')">
-                                                            <span class="icon is-small"><i class="fa ${class_heart}"
-                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count_heart}</span>
-                                                        </a>
-                                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
-
-                                        </div>                                        
+                                 
+                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
                                     </div>`
-
-                    $("#place_list").append(temp_html)
+                    $("#place_list").append(html_temp)
                 }
             }
         }

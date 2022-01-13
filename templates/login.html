@@ -3,8 +3,13 @@
 <head>
 
     <!-- Webpage Title -->
-    <title>Log In</title>
+    <title>LOG IN</title>
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="도쿄에 가자!"/>
+    <meta property="og:description" content="도쿄 핫플레이스는 여기 다 있네?"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,8 +32,8 @@
 <body>
 
 <section class="hero card" style="border-radius: 15px;">
-        <img src="{{ url_for('static',filename='banner.png') }}">
-    </section>
+    <img src="{{ url_for('static',filename='banner.png') }}">
+</section>
 <section class="section">
     <div class="container">
         <div class="box" style="max-width: 480px;margin:auto">
@@ -37,7 +42,7 @@
                     <div class="content">
                         <div class="field has-addons">
                             <div class="control has-icons-left" style="width:100%">
-                                <input id="input-id" class="input" type="text" placeholder="아이디" >
+                                <input id="input-id" class="input" type="text" placeholder="아이디">
                                 <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                             </div>
                             <div id="btn-check-dup" class="control is-hidden">
@@ -61,7 +66,7 @@
                     </div>
                     <div id="div-sign-in-or-up" class="has-text-centered">
                         <nav class="level is-mobile">
-                            <button class="level-item button desc" style="margin: 15px"; onclick="login()">
+                            <button class="level-item button desc" style="margin: 15px" ; onclick="login()">
                                 로그인
                             </button>
 

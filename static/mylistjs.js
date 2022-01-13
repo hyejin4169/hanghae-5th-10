@@ -18,21 +18,60 @@ function show_places() {
             for (let i = 0; i < places_list.length; i++) {
                 let title = places_list[i]['title']
                 let desc = places_list[i]['desc']
+                let time_post = new Date(places_list["date"])
                 let id = places_list[i]['_id']
+                let time_before = time2str(time_post)
                 console.log(places_list)
 
-                let temp_html =`<div class="reviews-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
-                                            <div class="reviews-body place_body">
-                                                <h5 class="reviews-title title">'${title}'</h5>
-                                                <p class="reviews-text contents_ellipsis">'${desc}'</p>
-                                                <input type="hidden" id="reviews_id" value="${id}">
-                                            </div>
-                                         </div>`
+
+                let temp_html = `<div class="cards-box " id="cards-box">
+                                            <div class="content">
+                                                    <p>
+                                                       <small>@${id}</small> <small>${time_before}</small>                                                     
+                                                    </p>
+                                        <div class="card-body place_body"  onclick="detail2('${title}')">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text contents_ellipsis">${desc}</p>
+                                        </div>
+                                 
+                                        <button onclick="deleteDesc('${title}')">삭제</button>
+                                    </div>`
                 $('#show_place').append(temp_html)
             }
         }
     })
 
+}
+
+function time2str(date) {
+    let today = new Date()
+    let time = (today - date) / 1000 / 60  // 분
+
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+}
+
+function num2str(count) {
+    if (count > 10000) {
+        return parseInt(count / 1000) + "k"
+    }
+    if (count > 500) {
+        return parseInt(count / 100) / 10 + "k"
+    }
+    if (count == 0) {
+        return ""
+    }
+    return count
 }
 
 
