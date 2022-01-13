@@ -13,7 +13,7 @@
   * 최종현 : 로그인 + 회원가입 CSS와 기능 구현   
  
 ## 2. 개발환경 & 기술스택💻🔨 
-* 개발환경
+### * 개발환경
 * Pycharm
 * Flask 2.0.1   
 * MongoDB 4.4
@@ -25,7 +25,7 @@
 * Bulma 0.9.2
 * Bootstrap 4.0.0
 * AWS EC2 (Ubuntu 18.04 LTS)
-* 개발언어
+### * 개발
 * JavaScript, Python, HTML, CSS
 
 ## 3. 실행화면🎬
