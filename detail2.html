@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Stylish&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            /*background-color: white;*/
+            font-family: 'Yeon Sung', cursive;
+        }
+
+        .wrap {
+            background-color: #815151;
+            background-color: RGBA(129, 81, 81, 0.2);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 200px;
+
+            background-color: white;
+            background-image: url("../static/Tokyo-Tower.jpg");
+        {#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#} background-size: cover;
+            background-position: center;
+
+        }
+
+        .banner h1 {
+            font-size: 100px;
+            margin: auto;
+            padding: 50px;
+            color: white;
+            text-align: center;
+        {#background-color: beige;#}{#opacity: 0;#}
+        }
+
+        .topbar {
+            background-color: #651e1e;
+
+
+            /*opacity: 0.5;*/
+
+            width: 100%;
+            height: 200px;
+
+            text-align: left;
+            font-weight: bold;
+            font-size: 50px;
+            padding: 50px 0px 0 50px;
+
+            color: white;
+        }
+
+        .image-box {
+            background-color: green;
+
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .imgclass {
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+        }
+
+        body {
+            min-height: 130vh;
+            background-color: #fff8dc;
+        }
+
+        .location-name {
+            background-color: white;
+            width: 500px;
+            margin: auto;
+            font-weight: bold;
+
+        }
+
+        .location-desc {
+            background-color: white;
+            width: 500px;
+            margin: auto;
+        }
+
+        .location-comment {
+            {#background-color: #dcdc77;#}
+            width: 500px;
+            margin: auto;
+        }
+
+        .location-comment textarea {
+            width: 100%;
+        }
+        .middle {
+            width: 510px;
+            border: 3px #651e1e solid;
+            border-radius: 5px;
+            background-color: white;
+            margin: 90px auto auto;
+        }
+
+        .mid_banner {
+            font-size: 50px;
+
+            position: relative;
+
+            width: 100%;
+            height: 300px;
+
+            color: floralwhite;
+            text-align: center;
+
+            background-image: url("https://stillmed.olympics.com/media/Images/OlympicOrg/News/2020/03/24/2020-03-24-tokyo-thumbnail-01.jpg");
+            background-size: cover;
+            background-position: center;
+
+            border-radius: 10px;
+
+            padding-top: 130px;
+
+        }
+        .button_design{
+            margin: unset;
+        }
+
+    </style>
+
+
+    <script>
+        /*cards
+        $(document).ready(function () {
+            showupload2(post)
+        })
+        function comt(){
+
+            alert('코멘트 작성 완료');
+        }
+
+       function showupload2(post){
+            let test =post
+            $.ajax({
+                type: "GET",
+                url: '/detail/'+test,
+                data: {},
+                success: function (response) {
+                    alert(response['msg'])
+                    $('#detailbox').empty()
+                    let title = response['title']
+                    let desc = response['desc']
+                    let temp_html = `<div class="wrap" id="detailbox">
+                                            <div class="banner" onclick="window.location.href='/'">
+                                                <h1>도쿄 가봤니?</h1>
+                                            </div>
+
+                                            <!--이미지 div -->
+                                            <div class="image-box" id="imagebox">
+                                                <image class="imgclass" src="${image}"></image>
+                                            </div>
+                                            <!--여행지 이름 div -->
+                                            <div class="location-name" id="namebox">
+                                                '${title}'
+                                            </div>
+                                            <!--내용 desc div-->
+                                            <div class="location-desc" id="descbox">
+                                                <p>${desc}</p>
+                                            </div>
+                                            <!--댓글, 후기 쓰기 -->
+                                            <div class="location-comment">
+                                                <textarea></textarea>
+                                                <button onclick="comt()">작성</button>
+                                            </div>
+                                        </div>`
+
+                    $('#detailbox').append(temp_html)
+                }
+            })
+        }*/
+        {#게시글 업로드#}
+
+        function create_new() {
+            let image = $('#imagebox').url
+            let title = $('#namebox').val()
+            let desc = $('#descbox').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/api/edit_List{{ title }}",
+                data: {
+                    image_give: image,
+                    title_give: title,
+                    desc_give: desc
+                },
+                success: function (response) {
+                    alert(response['msg'])
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+<!--    디테일 페이지-->
+
+<!--    <div class="topbar">-->
+<!--            MY Tokyo-->
+<!--    </div>-->
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light parent"
+     style="background-color: #8a0309; color: floralwhite;">
+    <img src="{{ url_for('static',filename='logo.png') }}" width="35">
+    <a class="navbar-brand" href="/" style="color: floralwhite;">
+        <marquee loop="unlimited" direction="right" bgcolor="transparent">도쿄에 가자!</marquee>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="navbar-nav">
+            <div class="nav-item active">
+                <a class="nav-link" href="/" style="color: floralwhite;">Home <span
+                        class="sr-only">(current)</span></a>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
+                    My Page
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="place_button"><a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                                                 style="color: floralwhite; background-color: transparent;">My
+                        Places</a></div>
+                    <div class="review_button"><a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                                                  style="color: floralwhite; background-color: transparent;">My
+                        Reviews</a></div>
+                </div>
+            </div>
+            <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
+                <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- 중간 배너, 검색창-->
+<div class="mid_banner">
+    <p><span style="text-shadow:4px 2px 2px #8a0309;">이번 휴가는 도쿄로 가자!</span>
+    <p>
+
+</div>
+<!--추가 배너 제외 내용 감싸주기 -->
+<div class="middle" style="margin-top: 20px">
+    <!--이미지 div -->
+    <div class="image-box" id="imagebox">
+        <image class="imgclass" src="/static/imageloading.png"></image>
+    </div>
+    <!--여행지 이름 div -->
+    <div class="location-name" id="namebox">
+        {{title}}
+    </div>
+    <!--내용 desc div-->
+    <div class="location-desc" id="descbox">
+        <p>{{desc}}</p>
+    </div>
+
+    <!--댓글, 후기 쓰기 -->
+    <div class="location-comment">
+        <textarea></textarea>
+        <button onclick="comt()">작성</button>
+    </div>
+</div>
+<div class="inputbundle" style="display: flex;justify-content: center;">
+    <input class="inputbtn button_design" type="button" onclick="window.location.href='/'" value="홈으로">
+    <input class="inputbtn button_design" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
+</div>
+
+</body>
+</html>
