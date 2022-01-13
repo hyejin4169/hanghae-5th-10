@@ -1,10 +1,9 @@
 //로그아웃 함수
 function logout() {
     $.removeCookie('mytoken');
-    alert('로그아웃!')
+    alert('또 만나요!')
     window.location.href = '/login'
 }
-
 //로그인 함수
 function login() {
     let id = $("#input-id").val()
@@ -54,19 +53,16 @@ function toggle_regist() {
     $("#help-pw").toggleClass("is-hidden")
     $("#help-pw2").toggleClass("is-hidden")
 }
-
 //아이디 생성이 가능한 범위를 정해주는 함수
 function is_id(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
-
 //비밀번호 생성이 가능한 범위를 정해주는 함수
 function is_pw(asValue) {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
     return regExp.test(asValue);
 }
-
 //아이디 체크해주는 함수
 function check_dup() {
     let id = $("#input-id").val()
@@ -101,7 +97,6 @@ function check_dup() {
         }
     });
 }
-
 //회원가입와 비밀번호 2차 입력을 도와주는 함수
 function regist() {
     let id = $("#input-id").val()
@@ -153,7 +148,6 @@ function regist() {
     });
 
 }
-
 // function show_lists() {
 //     $("#place_list").empty()
 //     $.ajax({
@@ -215,6 +209,7 @@ function get_posts() {
                     let post = posts[i]
                     let time_post = new Date(post["date"])
                     console.log(post)
+                    console.log(time_post)
 
                     let time_before = time2str(time_post)
                     // let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
@@ -237,11 +232,9 @@ function get_posts() {
         }
     })
 }
-
 function detail2(title) {
     window.location.href = `/detail/${title}?`
 }
-
 function time2str(date) {
     let today = new Date()
     let time = (today - date) / 1000 / 60  // 분
@@ -312,16 +305,15 @@ function toggle_like(post_id, type) {
 
     }
 }
-
 function deleteDesc(title) {
-    $.ajax({
-        type: 'POST',
-        url: '/api/delete',
-        data: {title_give: title},
-        success: function (response) {
-            alert(response['msg']);
-            window.location.reload()
-        }
-    });
-}
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/delete',
+                    data: {title_give:title},
+                    success: function (response) {
+                        alert(response['msg']);
+                        window.location.reload()
+                    }
+                });
+            }
 

@@ -174,7 +174,7 @@ def upload():
             "date": date_receive
         }
         db.posts.insert_one(doc)
-        return jsonify({"result": "success", 'msg': '업로드 성공!', 'title': title_receive})
+        return jsonify({"result": "success", 'msg': '업로드 성공', 'title': title_receive})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -303,7 +303,7 @@ def delete_star():
 
     db.posts.delete_one({'title': title_receive})
 
-    return jsonify({'msg': '삭제 완료!'})
+    return jsonify({'msg': '삭제 완료'})
 
 
 if __name__ == '__main__':

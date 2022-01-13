@@ -1,7 +1,7 @@
 //로그아웃 함수
 function logout() {
     $.removeCookie('mytoken');
-    alert('로그아웃!')
+    alert('또 만나요!')
     window.location.href = '/login'
 }
 
@@ -16,25 +16,25 @@ function show_places() {
             console.log('success')
             let places_list = response['all_places']
             for (let i = 0; i < places_list.length; i++) {
+                let time = places_list[i]
                 let title = places_list[i]['title']
                 let desc = places_list[i]['desc']
-                let time_post = new Date(places_list["date"])
-                let id = places_list[i]['_id']
+                let time_post = new Date(time["date"])
                 let time_before = time2str(time_post)
-                console.log(places_list)
+                console.log(time_before,time_post,places_list)
 
 
-                let temp_html = `<div class="cards-box " id="cards-box">
+                let temp_html =`<div class="cards-box " id="cards-box">
                                             <div class="content">
                                                     <p>
-                                                       <small>@${id}</small> <small>${time_before}</small>                                                     
+                                                       <small></small> <small>${time_before}</small>                                                     
                                                     </p>
                                         <div class="card-body place_body"  onclick="detail2('${title}')">
                                             <h5 class="card-title">${title}</h5>
                                             <p class="card-text contents_ellipsis">${desc}</p>
                                         </div>
                                  
-                                        <button onclick="deleteDesc('${title}')">삭제</button>
+                                        <button class="button_design" onclick="deleteDesc('${title}')">삭제</button>
                                     </div>`
                 $('#show_place').append(temp_html)
             }
@@ -42,7 +42,6 @@ function show_places() {
     })
 
 }
-
 function time2str(date) {
     let today = new Date()
     let time = (today - date) / 1000 / 60  // 분
