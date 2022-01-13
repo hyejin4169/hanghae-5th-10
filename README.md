@@ -25,11 +25,12 @@
 * Bulma 0.9.2
 * Bootstrap 4.0.0
 * AWS EC2 (Ubuntu 18.04 LTS)
-### * 개발
+### * 개발언어
 * JavaScript, Python, HTML, CSS
 
 ## 3. 실행화면🎬
-여기에 썸네일 이미지 넣기
+![KakaoTalk_Photo_2022-01-13-17-14-14](https://user-images.githubusercontent.com/96376530/149291685-baf783e5-6e3a-414a-a61c-a1671b63ddf8.png)
+
 * 영상 링크: <https://youtu.be/ndfShYCjPiI/>
 
 ## 4. 핵심기능✔
