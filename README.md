@@ -1,4 +1,4 @@
-# <img src="C:\Users\iiooi\OneDrive\바탕 화면\logo.png" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
+# <img src="static\logo.png" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="도쿄가자"></img><br/>
 
 
 도쿄에 가본 적 있으신가요? 넓은 도쿄에 가본 경험을 이곳에 작성해주세요! 
