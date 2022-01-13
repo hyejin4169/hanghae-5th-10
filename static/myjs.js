@@ -4,6 +4,7 @@ function logout() {
     alert('로그아웃!')
     window.location.href = '/login'
 }
+
 //로그인 함수
 function login() {
     let id = $("#input-id").val()
@@ -53,16 +54,19 @@ function toggle_regist() {
     $("#help-pw").toggleClass("is-hidden")
     $("#help-pw2").toggleClass("is-hidden")
 }
+
 //아이디 생성이 가능한 범위를 정해주는 함수
 function is_id(asValue) {
     var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
     return regExp.test(asValue);
 }
+
 //비밀번호 생성이 가능한 범위를 정해주는 함수
 function is_pw(asValue) {
     var regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{8,20}$/;
     return regExp.test(asValue);
 }
+
 //아이디 체크해주는 함수
 function check_dup() {
     let id = $("#input-id").val()
@@ -97,6 +101,7 @@ function check_dup() {
         }
     });
 }
+
 //회원가입와 비밀번호 2차 입력을 도와주는 함수
 function regist() {
     let id = $("#input-id").val()
@@ -200,7 +205,7 @@ function post() {
     })
 }
 
-//데이터별로 단독의 카드가 디스플레이 되려면 어떻게?
+//index에 모든 유저의 리뷰 디스플레이
 function get_posts() {
     $("#place_list").empty()
     $.ajax({
@@ -216,9 +221,9 @@ function get_posts() {
                     console.log(post)
 
                     let time_before = time2str(time_post)
-                    let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
+                    let class_heart = post['heart_by_me'] ? "fa-heart" : "fa-heart-o"
                     let count_heart = post['count_heart']
-                    let html_temp = `<div class="cards-box " id="cards-box">
+                    let temp_html = `<div class="cards-box " id="cards-box">
                                             <div class="content">
                                                     <p>
                                                        <small>@${post['id']}</small> <small>${time_before}</small>                                                     
@@ -232,20 +237,22 @@ function get_posts() {
                                                             <span class="icon is-small"><i class="fa ${class_heart}"
                                                                                            aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count_heart}</span>
                                                         </a>
-                                                    </div>
-                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
-                                        
+                                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
+
+                                        </div>                                        
                                     </div>`
 
-                    $("#place_list").append(html_temp)
+                    $("#place_list").append(temp_html)
                 }
             }
         }
     })
 }
+
 function detail2(title) {
     window.location.href = `/detail/${title}?`
 }
+
 function time2str(date) {
     let today = new Date()
     let time = (today - date) / 1000 / 60  // 분
@@ -316,15 +323,16 @@ function toggle_like(post_id, type) {
 
     }
 }
+
 function deleteDesc(title) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/delete',
-                    data: {title_give:title},
-                    success: function (response) {
-                        alert(response['msg']);
-                        window.location.reload()
-                    }
-                });
-            }
+    $.ajax({
+        type: 'POST',
+        url: '/api/delete',
+        data: {title_give: title},
+        success: function (response) {
+            alert(response['msg']);
+            window.location.reload()
+        }
+    });
+}
 
