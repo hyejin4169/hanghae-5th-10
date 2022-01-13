@@ -1,4 +1,5 @@
-# 도쿄 가자![logo](https://user-images.githubusercontent.com/94948873/149280277-0a21e8b2-a08a-4f63-8fcd-bbf378426f85.png)
+# <img src="C:\Users\iiooi\OneDrive\바탕 화면\logo.png" width="450px" height="300px" title="px(픽셀) 크기 설정" alt="RubberDuck"></img><br/>
+
 
 도쿄에 가본 적 있으신가요? 넓은 도쿄에 가본 경험을 이곳에 작성해주세요! 
 다른 사람의 경험도 공유하며 여행 지식을 쌓아봐요~!
