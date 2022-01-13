@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <meta property="og:title" content="가보자"/>
-    <meta property="og:description" content="mini project for Web Plus"/>
+    <meta property="og:title" content="도쿄에 가자!"/>
+    <meta property="og:description" content="도쿄 핫플레이스는 여기 다 있네?"/>
     <meta property="og:image" content="{{ url_for('static', filename='ogimg.png') }}"/>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -34,7 +34,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
-    <script defer src="../static/myjs.js"></script>
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -70,12 +70,12 @@
                     My Page
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
-                       style="color: floralwhite; background-color: transparent;">My
-                        Places</a>
-                    <a class="dropdown-item" onclick="window.location.replace('/go_review')"
-                       style="color: floralwhite; background-color: transparent;">My
-                        Reviews</a>
+                    <div class="place_button"><a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                                                 style="color: floralwhite; background-color: transparent;">My
+                        Places</a></div>
+                    <div class="review_button"><a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                                                  style="color: floralwhite; background-color: transparent;">My
+                        Reviews</a></div>
                 </div>
             </div>
             <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
@@ -92,10 +92,8 @@
         <button type="button" class="btn" onclick="window.location.replace('/upload')">리뷰 작성하러 Go!</button>
 </div>
 
-<!-- 모든 리뷰 정렬 -->
-<div id="place_list">
-</div>
-
+<!-- 좋아요 한 여행지 정렬 -->
+<div id="place_list" class="place_list">
 </div>
 </body>
 </html>

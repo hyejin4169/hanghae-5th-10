@@ -26,9 +26,9 @@ def home():
         # 유저 정보를 부여후 메인 페이지로 가기
         return render_template('index.html', user_info=user_info)
     except jwt.ExpiredSignatureError:  # 토큰이 만료 되었을 때
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+        return redirect(url_for("login"))
     except jwt.exceptions.DecodeError:  # 토큰을 부여 받지 못 했을때
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+        return redirect(url_for("login"))
 
 
 # 로그인 페이지로 이동하는 라우터
@@ -68,7 +68,7 @@ def sign_in():
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-        return jsonify({'result': 'success', 'token': token, 'msg': '도쿄 구경가자~!'})
+        return jsonify({'result': 'success', 'token': token, 'msg': '도쿄로 GO GO!'})
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
@@ -174,7 +174,7 @@ def upload():
             "date": date_receive
         }
         db.posts.insert_one(doc)
-        return jsonify({"result": "success", 'msg': '업로드 성공', 'title': title_receive})
+        return jsonify({"result": "success", 'msg': '업로드 성공!', 'title': title_receive})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -303,9 +303,8 @@ def delete_star():
 
     db.posts.delete_one({'title': title_receive})
 
-    return jsonify({'msg': '삭제 완료'})
+    return jsonify({'msg': '삭제 완료!'})
 
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-
