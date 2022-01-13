@@ -31,30 +31,26 @@
         }
 
         .wrap{
-            background-color: #815151;
-            background-color: RGBA(129, 81, 81, 0.2);
+            background-color: #fff8dc;
             min-height: 100vh;
-            padding-bottom: 50px;
-        }
+        {#    padding-bottom: 50px;#}
+        {#}#}
         .banner{
             width: 100%;
-            height: 200px;
+            height: 100px;
 
-            background-color: white;
-            background-image: url("/static/Tokyo-Tower.jpg");
+            background-color: #8a0309;
+            {#{background-image: url("/static/Tokyo-Tower.jpg");#}
             {#background-image: url('{{ url_for("static", filename="Tokyo-Tower.jpg") }}');#}
             background-size: cover;
             background-position: center;
 
         }
-        .banner h1{
-            font-size: 100px;
-            margin: auto;
-            padding: 50px;
+        . h1{
+           font-size: 30px;
             color: white;
-            text-align: center;
-            {#background-color: beige;#}
-            {#opacity: 0;#}
+            padding: 30px 0px 0px 20px;
+
         }
 
         .topbar{
@@ -76,7 +72,6 @@
 
         .image-box{
             background-color: green;
-
             width: 500px;
             height: 300px;
             overflow: hidden;
@@ -91,36 +86,50 @@
         }
 
         .location-name{
-            background-color: #7171d9;
+            {#background-color: #7171d9;#}
             width: 500px;
             margin: auto;
             font-weight: bold;
         }
         .location-desc{
-            background-color: beige;
+            {#background-color: beige;#}
             width: 500px;
             margin: auto;
         }
         .location-comment{
-            background-color: #dcdc77;
+            {#background-color: #dcdc77;#}
             width: 500px;
             margin: auto;
         }
         .location-comment textarea{
             width: 100%;
         }
-
+        .middle{
+            width: 510px;
+            border: 3px #651e1e solid;
+            {#border-color: #651e1e;#}
+            border-radius: 5px;
+            background-color: white;
+            margin: 90px auto auto;
+        }
+        .inputbtn{
+            display: flex;
+            float: right;
+            margin-top: 10px;
+            margin-right: 3px;
+        }
+        .inputbundle{
+            width: 500px;
+            margin: auto;
+        }
     </style>
 
 
     <script>
-        $(document).ready(function () {
+       $(document).ready(function () {
+            $('#detailbox').empty()
             showupload()
         })
-        function comt(){
-
-            alert('코멘트 작성 완료');
-        }
 
        function showupload(){
             $.ajax({
@@ -136,14 +145,45 @@
                     let image = null
                     let title = response['title']
                     let desc = response['desc']
-                    let temp_html = `<div class="wrap" id="detailbox">
-                                            <div class="banner" onclick="window.location.href='/'">
-                                                <h1>도쿄 가봤니?</h1>
+                    let temp_html = `
+                                        <nav class="navbar  navbar-expand-lg navbar-light parent" style="background-color: darkred;">
+                                            <a class="navbar-brand" href="#" style="color: floralwhite;">도쿄 가봤니?</a>
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                                                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                                <div class="navbar-nav">
+                                                    <div class="nav-item active">
+                                                        <a class="nav-link" href="/" style="color: floralwhite;">Home <span
+                                                                class="sr-only">(current)</span></a>
+                                                    </div>
+                                                    <div class="nav-item dropdown">
+                                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                                           aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
+                                                            My Page
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                                            <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                                                               style="color: floralwhite; background-color: transparent;">My
+                                                                Places</a>
+                                                            <a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                                                               style="color: floralwhite; background-color: transparent;">My
+                                                                Reviews</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
+                                                        <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </nav>
 
+                                        <!--추가 배너 제외 내용 감싸주기 -->
+                                        <div class="middle">
                                             <!--이미지 div -->
                                             <div class="image-box" id="imagebox">
-                                                <image class="imgclass" src="${image}"></image>
+                                                <image class="imgclass" src="/static/imageloading.png"></image>
                                             </div>
                                             <!--여행지 이름 div -->
                                             <div class="location-name" id="namebox">
@@ -153,11 +193,16 @@
                                             <div class="location-desc" id="descbox">
                                                 <p>${desc}</p>
                                             </div>
+
                                             <!--댓글, 후기 쓰기 -->
                                             <div class="location-comment">
                                                 <textarea></textarea>
                                                 <button onclick="comt()">작성</button>
                                             </div>
+                                        </div>
+                                        <div class="inputbundle">
+                                        <input class="inputbtn" type="button" onclick="window.location.href='/'" value="홈으로">
+                                        <input class="inputbtn" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
                                         </div>`
 
                     $('#detailbox').append(temp_html)
@@ -187,40 +232,68 @@
     </script>
 </head>
 <body>
-<!--    디테일 페이지-->
-
-<!--    <div class="topbar">-->
-<!--            MY Tokyo-->
-<!--    </div>-->
-
 
     <div class="wrap" id="detailbox">
-        <div class="banner" onclick="window.location.href='/'">
-            <h1>도쿄 가봤니?</h1>
+        <nav class="navbar navbar-expand-lg navbar-light parent" style="background-color: darkred;">
+            <a class="navbar-brand" href="#" style="color: floralwhite;">도쿄 가봤니?</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="navbar-nav">
+                    <div class="nav-item active">
+                        <a class="nav-link" href="/" style="color: floralwhite;">Home <span
+                                class="sr-only">(current)</span></a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" style="color: floralwhite;">
+                            My Page
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" onclick="window.location.replace('/go_mylist')"
+                               style="color: floralwhite; background-color: transparent;">My
+                                Places</a>
+                            <a class="dropdown-item" onclick="window.location.replace('/go_review')"
+                               style="color: floralwhite; background-color: transparent;">My
+                                Reviews</a>
+                        </div>
+                    </div>
+                    <div class="nav-item navbar-right" style="position: absolute; right: 10px;">
+                        <a class="nav-link" onclick="logout();" href="/login" style="color: floralwhite;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!--추가 배너 제외 내용 감싸주기 -->
+        <div class="middle">
+            <!--이미지 div -->
+            <div class="image-box" id="imagebox">
+                <image class="imgclass" src="/static/imageloading.png"></image>
+            </div>
+            <!--여행지 이름 div -->
+            <div class="location-name" id="namebox">
+                이곳은 여행지 이름이 들어가는 곳입니다
+            </div>
+            <!--내용 desc div-->
+            <div class="location-desc" id="descbox">
+                desc
+                <p>이곳은 여행지 desc가 들어가는 곳 입니다. 여행지 정보 가볼 곳 등등 정보를 받아오는곳...</p>
+            </div>
+
+            <!--댓글, 후기 쓰기 -->
+            <div class="location-comment">
+                <textarea></textarea>
+                <button onclick="comt()">작성</button>
+            </div>
+        </div>
+        <div class="inputbundle">
+            <input class="inputbtn" type="button" onclick="window.location.href='/'" value="홈으로">
+            <input class="inputbtn" type="button" onclick="window.location.href='/upload'" value="새글 쓰기">
         </div>
 
-        <!--이미지 div -->
-        <div class="image-box" id="imagebox">
-            image
-            <image class="imgclass" src="/static/Tokyo-Tower.jpg"></image>
-        </div>
-        <!--여행지 이름 div -->
-        <div class="location-name" id="namebox">
-            이곳은 여행지 이름이 들어가는 곳입니다
-        </div>
-        <!--내용 desc div-->
-        <div class="location-desc" id="descbox">
-            desc
-            <p>이곳은 여행지 desc가 들어가는 곳 입니다. 여행지 정보 가볼 곳 등등 정보를 받아오는곳...</p>
-        </div>
-
-        <!--댓글, 후기 쓰기 -->
-        <div class="location-comment">
-            <textarea></textarea>
-            <button onclick="comt()">작성</button>
-        </div>
-        <button onclick="window.location.replace('/')">홈으로</button>
-        <button onclick="window.location.href='/upload'">새글 쓰기</button>
     </div>
 
 </body>

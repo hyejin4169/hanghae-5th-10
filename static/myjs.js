@@ -148,35 +148,35 @@ function regist() {
     });
 
 }
-function show_lists() {
-    $("#place_list").empty()
-    $.ajax({
-        type: "GET",
-        url: "/get_lists",
-        data: {},
-        success: function (response) {
-            console.log('success')
-            let place_list = response['all_places']
-            for (let i = 0; i < place_list.length; i++) {
-                let title = place_list[i]['title']
-                let contents = place_list[i]['contents']
-                let id = place_list[i]['_id']
-                console.log('test : ' + title, contents, id)
-
-                let temp_html = `<div class="cards-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
-                                            <div class="card-body place_body">
-                                                <h5 class="card-title title">${title}</h5>
-                                                <p class="card-text contents_ellipsis">${contents}</p>
-                                                <input type="hidden" id="place_id" value="${id}">
-                                            </div>
-                                         </div>`
-
-                $('#place_list').append(temp_html)
-            }
-        }
-    })
-
-}
+// function show_lists() {
+//     $("#place_list").empty()
+//     $.ajax({
+//         type: "GET",
+//         url: "/get_lists",
+//         data: {},
+//         success: function (response) {
+//             console.log('success')
+//             let place_list = response['all_places']
+//             for (let i = 0; i < place_list.length; i++) {
+//                 let title = place_list[i]['title']
+//                 let contents = place_list[i]['contents']
+//                 let id = place_list[i]['_id']
+//                 console.log('test : ' + title, contents, id)
+//
+//                 let temp_html = `<div class="cards-box w-100 mb-3 row" style="width:200px; height:300px; max-width: 350px; max-height: 300px;">
+//                                             <div class="card-body place_body">
+//                                                 <h5 class="card-title title">${title}</h5>
+//                                                 <p class="card-text contents_ellipsis">${contents}</p>
+//                                                 <input type="hidden" id="place_id" value="${id}">
+//                                             </div>
+//                                          </div>`
+//
+//                 $('#place_list').append(temp_html)
+//             }
+//         }
+//     })
+//
+// }
 function post() {
     let title = $("#title-post").val()
     let desc = $("#desc-post").val()
@@ -211,8 +211,8 @@ function get_posts() {
                     console.log(post)
 
                     let time_before = time2str(time_post)
-                    let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
-                    let count_heart = post['count_heart']
+                    // let class_heart = post['heart_by_me'] ? "fa-heart": "fa-heart-o"
+                    // let count_heart = post['count_heart']
                     let html_temp = `<div class="cards-box " id="cards-box">
                                             <div class="content">
                                                     <p>
@@ -222,13 +222,8 @@ function get_posts() {
                                             <h5 class="card-title">${post['title']}</h5>
                                             <p class="card-text contents_ellipsis">${post['desc']}</p>
                                         </div>
-                                        <div class="level-left">
-                                                        <a class="level-item is-sparta" aria-label="heart" onclick="toggle_like('${post['_id']}', 'heart')">
-                                                            <span class="icon is-small"><i class="fa ${class_heart}"
-                                                                                           aria-hidden="true"></i></span>&nbsp;<span class="like-num">${count_heart}</span>
-                                                        </a>
-                                                    </div>
-                                        <button onclick="deleteDesc('${post['title']}')">삭제</button>
+                                 
+                                        <button class="button_design" onclick="deleteDesc('${post['title']}')">삭제</button>
                                     </div>`
                     $("#place_list").append(html_temp)
                 }

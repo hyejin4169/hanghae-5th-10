@@ -107,9 +107,7 @@ body {
     outline: none;
 }
 
-.cards-box {
-    border-radius: 25px;
-}
+
 
 .cards {
     display: block;
@@ -119,4 +117,50 @@ body {
     flex-wrap: wrap;
     float: none;
     margin: 0 auto;
+}
+.place_list {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+.cards-box {
+    border-radius: 25px;
+    border: solid 2px black;
+    width: 20%;
+    margin: 25px 50px 25px 50px;
+    background-color: white;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+.places_list{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+/*글쓰기 버튼*/
+.btn {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
+}
+
+/*삭제 버튼*/
+.button_design {
+    margin: auto;
+    font-family: "BM Yeonsung", cursive;
+    border-radius: 10px;
+    border-color: antiquewhite;
+    background-color: #8a0309;
+    color: floralwhite;
+    text-shadow:2px 2px 2px palevioletred;
+    float: right;
 }

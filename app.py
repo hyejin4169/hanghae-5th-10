@@ -25,9 +25,9 @@ def home():
         #유저 정보를 부여후 메인 페이지로 가기
         return render_template('index.html', user_info=user_info)
     except jwt.ExpiredSignatureError: # 토큰이 만료 되었을 때
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+        return redirect(url_for("login"))
     except jwt.exceptions.DecodeError: #토큰을 부여 받지 못 했을때
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+        return redirect(url_for("login"))
 #로그인 페이지로 이동하는 라우터
 @app.route('/login')
 def login():
