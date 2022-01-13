@@ -6,30 +6,26 @@
 
 * 2022년 1월10일~2022년 1월13일   
 * 3인 1조 팀 프로젝트   
- * 윤혜진 : 메인 페이지 CSS와 기능 구현   
- * 김지성 : 디테일 페이지 CSS와 기능 구현   
- * 최종현 : 로그인 +회원가입 CSS와 기능 구현   
+  * 윤혜진 : 메인 페이지 CSS와 기능 구현   
+  * 김지성 : 디테일 페이지 CSS와 기능 구현   
+  * 최종현 : 로그인 +회원가입 CSS와 기능 구현   
  
 ## 2.사용기술   
 <pre>
 Back-end
 </pre>
-*Python 3
-*Flask 2.0.1
-*MongoDB 4.4
+* Python 3   
+* Flask 2.0.1   
+* MongoDB 4.4   
 <pre>
-<code>
 Front-end
-</code>
 </pre>
-*JQuery 3.5.1
-*Bulma 0.9.2
+* JQuery 3.5.1   
+* Bulma 0.9.2   
 <pre>
-<code>
 deploy
-</code>
 </pre>
-*AWS EC2 (Ubuntu 18.04 LTS)
+* AWS EC2 (Ubuntu 18.04 LTS)   
 
 ## 3. 실행화면
 * 영상링크: <https://youtu.be/ndfShYCjPiI/>
